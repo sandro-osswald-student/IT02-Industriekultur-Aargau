@@ -1,3 +1,7 @@
+#include <SoftwareSerial.h>
+
+SoftwareSerial bt(2,3); // RX, TX
+
 int sensorPin1 = A0; // select the input pin for LDR
 int sensorPin2 = A1; // select the input pin for LDR
 
@@ -16,7 +20,14 @@ String data;
  
 // Serielle Schnittstelle einrichten, pinModes setzen
 void setup() {
+
+  bt.begin(2400);
   Serial.begin(2400);
+  pinMode(ledPin1, OUTPUT);
+  pinMode(ledPin2, OUTPUT);
+
+  pinMode(sensorPin1, INPUT);
+  pinMode(sensorPin2, INPUT);
 }
 
 void loop() {
@@ -36,7 +47,7 @@ Serial.println(sensorValue2);
   delay(500);
 
 
-  if (sensorValue1  >= 940)
+  if (sensorValue1  >= 800)
   {
    digitalWrite(ledPin1, HIGH);
    lightState1=true;
@@ -45,10 +56,10 @@ Serial.println(sensorValue2);
    else{
     digitalWrite(ledPin1, LOW);
     lightState1=false;
-    //Serial.write(sensorValue1);
+    Serial.write(sensorValue1);
   }
 
-  if (sensorValue2 >= 940)
+  if (sensorValue2 >= 800)
   {
    digitalWrite(ledPin2, HIGH);
    lightState2=true;
