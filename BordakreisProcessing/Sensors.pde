@@ -1,4 +1,4 @@
-/*void sensorDetection(){
+void sensorDetection(){
   // Steht was in portStream? (d.h. wurde ein vollständiger Datenblock übertragen)
     if(portStream != null) {
     // Entspricht der Datenblock dem Format "SxxE\r\n"? Wenn ja, dann weiter
@@ -29,4 +29,3 @@
     }
   }
 }
-*/

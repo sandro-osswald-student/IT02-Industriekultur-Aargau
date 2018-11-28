@@ -1,14 +1,14 @@
 //Processing Sketch
 // Serielle Bibliothek einbinden
-//import processing.serial.*;
+import processing.serial.*;
  
  
  
 // Objekt zur Überwachung eines seriellen Ports erzeugen
-//Serial myPort;
+Serial myPort;
  
 // String für empfangene Daten
-//String portStream;
+String portStream;
  
 // Zustände der beiden Sensoren
 int B1in = 0;
@@ -25,7 +25,7 @@ void setup() {
   
   //addTextfields();
   
-  /*Arduino code
+  //Arduino code  /**/
   
   
   // Hier muss der Index des Arduino-Ports ausgewählt werden. Notfalls ausprobieren.
@@ -36,14 +36,20 @@ void setup() {
   // Damit ist ein Datenblock vollständig übertragen. \n ist das 2. Zeichen eines Zeilenwechsels (\r\n)
   myPort.bufferUntil('\n');
   
-  */
+  
 }
  
 // Wie loop() beim Arduino wird draw() immer wieder aufgerufen, solange das Programm ausgeführt wird.
 void draw() {
   background(0);
-  //sensorDetection();
-  drawScreen();
+  sensorDetection();
+  if(portStream != null) {
+    // Entspricht der Datenblock dem Format "SxxE\r\n"? Wenn ja, dann weiter
+    if (portStream.length() == 6 && portStream.charAt(0) == 'S' && portStream.charAt(3) == 'E') {
+  drawScreen(portStream);
+    }
+  }
+  drawScreen("");
   
 
  
@@ -51,6 +57,6 @@ void draw() {
  
 // serialEvent wird aufgerufen, wenn das weiter oben über bufferUntil definierte Zeichen empfangen wird.
 // Dann wird der Inhalt des seriellen Buffers in portStream geschrieben.
-//void serialEvent(Serial myPort) {
-//  portStream = myPort.readString();
-//}
+void serialEvent(Serial myPort) {
+  portStream = myPort.readString();
+}
