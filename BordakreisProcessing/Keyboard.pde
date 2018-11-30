@@ -40,6 +40,14 @@ void drawNumPad(){
   num9.Draw();
   num0.Draw();
   deleteButton.Draw();
+ 
+}
+
+public String getNumber(){
+  return number;
+}
+public void clearNumber(){
+  number = "";
 }
 
 /* add Texfield for strings
@@ -70,6 +78,41 @@ void isNumberHit(){
   if (num2.MouseIsOver()) {
     // print some text to the console pane if the button is clicked
     number += "2";
+    println(number);
+  }
+  if (num3.MouseIsOver()) {
+    // print some text to the console pane if the button is clicked
+    number += "3";
+    println(number);
+  }
+  if (num4.MouseIsOver()) {
+    // print some text to the console pane if the button is clicked
+    number += "4";
+    println(number);
+  }
+  if (num5.MouseIsOver()) {
+    // print some text to the console pane if the button is clicked
+    number += "5";
+    println(number);
+  }
+  if (num6.MouseIsOver()) {
+    // print some text to the console pane if the button is clicked
+    number += "6";
+    println(number);
+  }
+  if (num7.MouseIsOver()) {
+    // print some text to the console pane if the button is clicked
+    number += "7";
+    println(number);
+  }
+  if (num8.MouseIsOver()) {
+    // print some text to the console pane if the button is clicked
+    number += "8";
+    println(number);
+  }
+  if (num9.MouseIsOver()) {
+    // print some text to the console pane if the button is clicked
+    number += "9";
     println(number);
   }
   if (deleteButton.MouseIsOver()) {

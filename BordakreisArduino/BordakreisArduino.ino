@@ -16,13 +16,13 @@ int lightState1 = 0;
 int lightState2 = 0;
  
 // Enthält den String, der an den PC geschickt wird
-String data;
+String data;;
  
 // Serielle Schnittstelle einrichten, pinModes setzen
 void setup() {
 
-  bt.begin(2400);
-  Serial.begin(2400);
+  bt.begin(9600);
+  Serial.begin(9600);
   pinMode(ledPin1, OUTPUT);
   pinMode(ledPin2, OUTPUT);
 
@@ -34,6 +34,7 @@ void loop() {
 
 sensorValue1 = analogRead(sensorPin1); // read the value from the sensor 1
 sensorValue2 = analogRead(sensorPin2); // read the value from the sensor 2
+
 
 Serial.print("SensorValue1: ");
 Serial.println(sensorValue1);
@@ -56,7 +57,6 @@ Serial.println(sensorValue2);
    else{
     digitalWrite(ledPin1, LOW);
     lightState1=false;
-    Serial.write(sensorValue1);
   }
 
   if (sensorValue2 >= 800)
