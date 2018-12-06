@@ -1,3 +1,5 @@
+import g4p_controls.*;
+
 //Processing Sketch
 // Serielle Bibliothek einbinden
 import processing.serial.*;
@@ -9,6 +11,7 @@ Serial myPort;
  
 // String für empfangene Daten
 String portStream = "empty";
+String portStreamDummy = "S01E";
  
 // Zustände der beiden Sensoren
 int B1in = 0;
@@ -23,10 +26,8 @@ void setup() {
   stroke(160);
   fill(0);
   
-  //addTextfields();
-  
   //Arduino code  /**/
-  
+  /*
   
   // Hier muss der Index des Arduino-Ports ausgewählt werden. Notfalls ausprobieren.
   String portName = Serial.list()[0];
@@ -35,16 +36,16 @@ void setup() {
   // Ankommende Zeichen am Port werden solange gebuffert, bis das angebene Zeichen empfangen wird.
   // Damit ist ein Datenblock vollständig übertragen. \n ist das 2. Zeichen eines Zeilenwechsels (\r\n)
   myPort.bufferUntil('\n');
-  
+  */
   
 }
  
 // Wie loop() beim Arduino wird draw() immer wieder aufgerufen, solange das Programm ausgeführt wird.
 void draw() {
   background(255);
-  sensorDetection();
+  drawScreen(portStreamDummy);
   
-  
+/*
   if(portStream != null) {
     // Entspricht der Datenblock dem Format "SxxE\r\n"? Wenn ja, dann weiter
     if (portStream.length() == 6 && portStream.charAt(0) == 'S' && portStream.charAt(3) == 'E') {
@@ -52,13 +53,13 @@ void draw() {
     }
   }
   drawScreen("");
-  
+
 
 if ( myPort.available() > 0)
 { // If data is available,
 portStream = myPort.readStringUntil('\n'); // read it and store it in val
 }
-//println(portStream); //print it out in the console
+println(portStream); //print it out in the console
  
 }
  
@@ -66,4 +67,6 @@ portStream = myPort.readStringUntil('\n'); // read it and store it in val
 // Dann wird der Inhalt des seriellen Buffers in portStream geschrieben.
 void serialEvent(Serial myPort) {
   portStream = myPort.readString();
-}
+
+*/
+}  

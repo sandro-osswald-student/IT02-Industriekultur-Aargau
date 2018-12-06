@@ -4,8 +4,13 @@ class InputField {
   float y;    // top left corner y position
   float w;    // width of button
   float h;    // height of button
+  
+  boolean isSelected= false;
+  
   int highColor = 190;
   int normalColor = 218;
+  int selectedColor = 190;
+  int selectedColorHigh = 160;
   
   InputField(String labelB, float xpos, float ypos, float widthB, float heightB) {
     label = labelB;
@@ -16,12 +21,20 @@ class InputField {
   }
   
   void Draw() {
-    
+  if(isSelected){  
+   if (MouseIsOver()) {
+    fill(0,selectedColorHigh, 0);
+  }else {
+    fill(0, selectedColor, 0);
+  }
+  }else{
     if (MouseIsOver()) {
     fill(highColor);
-  } else {
+  }else {
     fill(normalColor);
   }
+  }
+ 
     stroke(141);
     rect(x, y, w, h, 10);
     textAlign(CENTER, CENTER);
@@ -38,5 +51,13 @@ class InputField {
   
   void setLabel(String newLabel){
     label = newLabel;
+  }
+  
+  boolean getIsSelected(){
+    return isSelected;
+  }
+  
+  void changeSelection(){
+    isSelected = !isSelected;
   }
 }

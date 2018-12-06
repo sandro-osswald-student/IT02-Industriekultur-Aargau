@@ -1,6 +1,6 @@
 import controlP5.*;
 
-int xpos = 600;
+int xpos = 800;
 int ypos = 500; 
 
 Button num1 = new Button("1",xpos, ypos,100,100);
@@ -13,7 +13,7 @@ Button num7 = new Button("7",xpos, ypos+200,100,100);
 Button num8 = new Button("8",xpos+100, ypos+200,100,100);
 Button num9 = new Button("9",xpos+200, ypos+200,100,100);
 Button num0 = new Button("0",xpos, ypos+300,100,100);
-Button deleteButton = new Button("delete",700, 800,200,100);
+Button deleteButton = new Button("delete",xpos+100, ypos+300,200,100);
 
 
 

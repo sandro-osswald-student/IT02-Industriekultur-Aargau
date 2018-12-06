@@ -7,9 +7,7 @@ Button menu1 = new Button("menu1", 100,100,500,200);
 Button menu2 = new Button("menu2", 700,100,500,200);
 Button menu3 = new Button("menu3", 100,400,500,200);
 Button menu4 = new Button("menu4", 700,400,500,200);
-Button bestaetigen = new Button ("Bestätigen", 800, 100, 200, 100);
-InputField distance1 = new InputField("0", 400, 100, 100, 100);
-InputField distance2 = new InputField("0", 600, 100, 100, 100);
+
 
 int distanceInt1 = 0;
 int distanceInt2 = 0;
@@ -23,7 +21,13 @@ void mainMenu(){
 
 //SecondaryMenu
 
-Button menu5 = new Button("menu5",200,200,500,200);
+Button menu5 = new Button("zurück",100,100,200,100);
+
+Button bestaetigen = new Button ("Bestätigen", 800, 100, 200, 100);
+InputField winkelField = new InputField("45°", 100, 800, 100, 100);
+InputField distance1 = new InputField("0", 250, 800, 150, 100);
+InputField distance2 = new InputField("0", 450, 800, 150, 100);
+
 
 
 void secondaryMenu(String label1){
@@ -34,6 +38,8 @@ void secondaryMenu(String label1){
   fillInputFields();
   text(distanceInt1, 800, 100);
   text(distanceInt2, 800, 200);
+  drawModell(100,400);
+  drawLines(100,500);
   
 }
 
@@ -49,6 +55,8 @@ void drawScreen(String label1){
 void drawInputFields(){
   distance1.Draw();
   distance2.Draw();
+  fill(30);
+  winkelField.Draw();
   
 }
 
@@ -90,11 +98,17 @@ void mousePressed(){
     else if(distance1.MouseIsOver()){
       clearNumber();
       numberState = 1;
+      if(!distance1.getIsSelected()){
+      distance1.changeSelection();
+      }
       println("numberState is 0"); 
     }
     else if(distance2.MouseIsOver()){
       clearNumber();
       numberState = 2;
+      if(!distance2.getIsSelected()){
+      distance2.changeSelection();
+      }
       println("numberState is 1"); 
     }
     else if(bestaetigen.MouseIsOver()){
@@ -114,4 +128,8 @@ void mousePressed(){
     isNumberHit();
     }
     
+  }
+  
+  void changeNumberState(int state){
+    numberState = state;
   }

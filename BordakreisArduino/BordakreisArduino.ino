@@ -4,19 +4,21 @@ SoftwareSerial bt(2,3); // RX, TX
 
 int sensorPin1 = A0; // select the input pin for LDR
 int sensorPin2 = A1; // select the input pin for LDR
+int sensorPinEnv = A2; // select the input pin for LDR
 
 int sensorValue1 = 0; // variable to store the value coming from the sensor
 int sensorValue2 = 0; // variable to store the value coming from the sensor
+int sensorValueEnv = 0; // variable to store the value coming from the sensor
 
-const int ledPin1 = 2;
-const int ledPin2 = 3;
+const int ledPin1 = 3;
+const int ledPin2 = 2;
 
 // Zum Zwischenspeichern der Button-Zustände
 int lightState1 = 0;
 int lightState2 = 0;
  
 // Enthält den String, der an den PC geschickt wird
-String data;;
+String data = "abbaabbaaaa";
  
 // Serielle Schnittstelle einrichten, pinModes setzen
 void setup() {
@@ -28,18 +30,22 @@ void setup() {
 
   pinMode(sensorPin1, INPUT);
   pinMode(sensorPin2, INPUT);
+  pinMode(sensorPinEnv, INPUT);
 }
 
 void loop() {
 
 sensorValue1 = analogRead(sensorPin1); // read the value from the sensor 1
 sensorValue2 = analogRead(sensorPin2); // read the value from the sensor 2
+sensorValueEnv = analogRead(sensorPinEnv); // read the value from the sensor Enviroment
 
 
 Serial.print("SensorValue1: ");
 Serial.println(sensorValue1);
 Serial.print("SensorValue2: ");
 Serial.println(sensorValue2);
+//Serial.print("SensorValueEnv: ");
+//Serial.println(sensorValueEnv);
 
   data = normalizeData(lightState1, lightState2);
   // dieser String (z.B. S10E+Zeilwenwechsel) wird dann seriell ausgegeben.
@@ -47,8 +53,8 @@ Serial.println(sensorValue2);
   // Um die serielle Ausgabe zu beobachten, einfach nach dem Programmstart den seriellen Monitor in der Arduino Umgebung starten
   delay(500);
 
-
-  if (sensorValue1  >= 800)
+  //if (sensorValue1  >= sensorValueEnv + 100)
+  if (sensorValue1  >= 830)
   {
    digitalWrite(ledPin1, HIGH);
    lightState1=true;
@@ -59,7 +65,8 @@ Serial.println(sensorValue2);
     lightState1=false;
   }
 
-  if (sensorValue2 >= 800)
+  //if (sensorValue2 >= sensorValueEnv + 100)
+  if (sensorValue2 >= 830)
   {
    digitalWrite(ledPin2, HIGH);
    lightState2=true;
