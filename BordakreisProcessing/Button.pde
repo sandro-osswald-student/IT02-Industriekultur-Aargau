@@ -6,6 +6,7 @@ class Button {
   float h;    // height of button
   int highColor = 190;
   int normalColor = 218;
+  boolean isSelectable = true;
   
   Button(String labelB, float xpos, float ypos, float widthB, float heightB) {
     label = labelB;
@@ -18,15 +19,24 @@ class Button {
   void Draw() {
     
     if (MouseIsOver()) {
-    fill(highColor);
+    fill(37, 87, 168);
   } else {
-    fill(normalColor);
+    fill(112, 159, 234);
   }
+  if(isSelectable){
     stroke(141);
     rect(x, y, w, h, 10);
     textAlign(CENTER, CENTER);
     fill(0);
     text(label, x + (w / 2), y + (h / 2));
+  }else{
+    stroke(170);
+    fill(200);
+    rect(x, y, w, h, 10);
+    textAlign(CENTER, CENTER);
+    fill(150);
+    text(label, x + (w / 2), y + (h / 2));
+  }
   }
   
   boolean MouseIsOver() {
@@ -34,5 +44,15 @@ class Button {
       return true;
     }
     return false;
+  }
+  
+  void notSelectable(){
+    isSelectable = false;
+  }
+  void turnSelectable(){
+    isSelectable = true;
+  }
+  public boolean canBeSelected(){
+    return isSelectable;
   }
 }

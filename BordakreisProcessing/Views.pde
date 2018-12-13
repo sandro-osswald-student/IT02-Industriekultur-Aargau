@@ -1,9 +1,12 @@
 int screenState = 0;
+int gameState = 0;
 int numberState = 0;
+int angle;
+static int maxGameStates = 10;
 
 // Main Menu
 
-Button menu1 = new Button("menu1", 100,100,500,200);
+Button game = new Button("Spiel", 100,100,500,200);
 Button menu2 = new Button("menu2", 700,100,500,200);
 Button menu3 = new Button("menu3", 100,400,500,200);
 Button menu4 = new Button("menu4", 700,400,500,200);
@@ -12,8 +15,10 @@ Button menu4 = new Button("menu4", 700,400,500,200);
 int distanceInt1 = 0;
 int distanceInt2 = 0;
 
+
+
 void mainMenu(){
-  menu1.Draw();
+  game.Draw();
   menu2.Draw();
   menu3.Draw();
   menu4.Draw(); 
@@ -21,26 +26,117 @@ void mainMenu(){
 
 //SecondaryMenu
 
-Button menu5 = new Button("zurück",100,100,200,100);
+Button home = new Button("Home",100,50,200,100);
+Button next = new Button("weiter",700,50,200,100);
+Button back = new Button("zurück",400,50,200,100);
+Button newGame = new Button("wiederholen",700,50,200,100);
 
-Button bestaetigen = new Button ("Bestätigen", 800, 100, 200, 100);
-InputField winkelField = new InputField("45°", 100, 800, 100, 100);
-InputField distance1 = new InputField("0", 250, 800, 150, 100);
-InputField distance2 = new InputField("0", 450, 800, 150, 100);
+InputField winkelField = new InputField("0", 100, 800, 100, 100);
+InputField distance1 = new InputField("", 250, 800, 150, 100);
+InputField distance2 = new InputField("", 450, 800, 150, 100);
+InputField result = new InputField("0°", 700, 800, 100, 100);
 
 
 
-void secondaryMenu(String label1){
-  menu5.Draw();
-  bestaetigen.Draw();
-  drawNumPad();
-  drawInputFields();
-  fillInputFields();
-  text(distanceInt1, 800, 100);
-  text(distanceInt2, 800, 200);
-  drawModell(100,400);
-  drawLines(100,500);
-  
+void secondaryMenu(){
+    int x1 = 100;
+    int y1 = 200;
+    int x2 = 800;
+    int y2 = 100;
+  if(gameState == 0){
+
+    fill(0, 255, 130);
+    rect(x1, y1, x2, y2);
+    textSize(32);
+    String s = "Beleuchte zwei Felder mit dem Bordakreis";
+    fill(50);
+    text(s, x1, y1, x2, y2);  // Text wraps within text box
+    image(myAnimation, 1100, 450);
+    next.Draw();
+    back.Draw();
+    home.Draw();
+    drawModell(100,400);
+    drawLines(100,400);
+    isNumberEmpty();
+    
+  }else if(gameState == 1){
+    home.Draw();
+    next.Draw();
+    back.Draw();
+    drawNumPad();
+    drawInputFields();
+    fillInputFields();
+    drawModell(100,400);
+    drawLines(100,400);
+    fill(0, 255, 130);
+    rect(x1, y1, x2, y2);
+    textSize(32);
+    String s = "Trage den angezeigten Winkel in das entsprechende Feld ein.";
+    fill(50);
+    text(s, x1, y1, x2, y2);  // Text wraps within text box
+    isNumberEmpty();
+    
+  }else if(gameState == 2){
+    home.Draw();
+    next.Draw();
+    back.Draw();
+    drawNumPad();
+    drawInputFields();
+    fillInputFields();
+    drawModell(100,400);
+    drawLines(100,400);
+    fill(0, 255, 130);
+    rect(x1, y1, x2, y2);
+    textSize(32);
+    String s = "Messe die Distanz 1 vom Bordakreis zum Objekt.";
+    fill(50);
+    text(s, x1, y1, x2, y2);  // Text wraps within text box
+    isNumberEmpty();
+    
+  }else if(gameState == 3){
+    home.Draw();
+    next.Draw();
+    back.Draw();
+    drawNumPad();
+    drawInputFields();
+    fillInputFields();
+    drawModell(100,400);
+    drawLines(100,400);
+    fill(0, 255, 130);
+    rect(x1, y1, x2, y2);
+    textSize(32);
+    String s = "Messe die Distanz 2 vom Bordakreis zum Objekt";
+    fill(50);
+    text(s, x1, y1, x2, y2);  // Text wraps within text box
+    isNumberEmpty();
+    
+  }else if(gameState == 4){
+    home.Draw();
+    //next.Draw();
+    newGame.Draw();
+    back.Draw();
+    drawNumPad();
+    drawInputFields();
+    fillInputFields();
+    fill(255, 0, 130);
+    rect(x1, y1, x2, y2);
+    textSize(32);
+    String s = "Lösung: Wurzel aus (" + distanceInt1 + "^2 - 2 * " + distanceInt1 + " * " + distanceInt2 + " * cos(" + angle + ") + " + distanceInt2 + "^2)";
+    fill(50);
+    text(s, x1, y1, x2, y2);  // Text wraps within text box
+  }else if(gameState == 5){
+    home.Draw();
+    //next.Draw();
+    newGame.Draw();
+    back.Draw();
+    drawNumPad();
+    drawInputFields();
+    fillInputFields();
+    //text(distanceInt1, 800, 100);
+    //text(distanceInt2, 800, 200);
+    drawModell(100,400);
+    drawLines(100,400);
+  }
 }
 
 void drawScreen(String label1){
@@ -48,27 +144,56 @@ void drawScreen(String label1){
     mainMenu();
   }
   if(screenState == 1){
-    secondaryMenu(label1);   
+    secondaryMenu();   
   }
 }
 
 void drawInputFields(){
-  distance1.Draw();
-  distance2.Draw();
-  fill(30);
-  winkelField.Draw();
   
+  if(gameState == 1){
+      text("Winkel", 140, 780);
+      winkelField.Draw();
+    
+  }else if(gameState ==2){
+    text("Distanz 1", 300, 780);
+    distance1.Draw();
+    fill(30);
+    text("Winkel", 140, 780);
+    winkelField.Draw();
+    
+  }else if(gameState ==3){
+    text("Distanz 1", 300, 780);
+    text("Distanz 2", 500, 780);
+    distance1.Draw();
+    distance2.Draw();
+    fill(30);
+    text("Winkel", 140, 780);
+    winkelField.Draw();
+  }else if(gameState <=4){
+    text("Distanz 1", 300, 780);
+    text("Distanz 2", 500, 780);
+    distance1.Draw();
+    distance2.Draw();
+    fill(30);
+    text("Winkel", 140, 780);
+    winkelField.Draw();
+    text("Resultat", 750, 780);
+    result.Draw();
+    angle = calculateAngle(0,0);
+    winkelField.setLabel(Integer.toString(angle)+"°");
+    result.setLabel(Integer.toString(calculateAngle(distanceInt1, distanceInt2, angle))+"°");
+    println(angle);
+  }
 }
 
 void fillInputFields(){
   if(numberState == 1){
   distance1.setLabel(getNumber());
-  distance2.setLabel("0");
   }
   if(numberState == 2){
   distance2.setLabel(getNumber());
-  distance1.setLabel("0");
   }
+  
 }
 
 void safeNumberInDistanceInt(){
@@ -80,29 +205,53 @@ void safeNumberInDistanceInt(){
   }
 }
 
+int calculateAngle(int firstAngle, int secondAngle){
+  
+  if(portStream != null) {
+    // Entspricht der Datenblock dem Format "SxxE\r\n"? Wenn ja, dann weiter
+    if (portStream.length() == 6 && portStream.charAt(0) == 'S' && portStream.charAt(3) == 'E') {
+      // 2. und 3. Zeichen auslesen
+      firstAngle = int(portStream.substring(1,2));   // z.B. bei "S10E" = 1
+      secondAngle = int(portStream.substring(2,3));   // z.B. bei "S10E" = 0
+    }
+  }
+  if(firstAngle ==1 || firstAngle ==2 && secondAngle ==1 || secondAngle ==2 && firstAngle !=secondAngle){
+    return 10;
+  }
+  return 0;
+}
+
+int calculateAngle(int distanceValue1, int distanceValue2, int angle){
+  if(angle != 0 && distanceValue1 != 0 && distanceValue2 != 0){
+  return int(sqrt(sq(distanceValue1) - 2*distanceValue1*distanceValue2*cos(angle) + sq(angle)));
+  }
+  return 0;
+}
+
 void mousePressed(){
   if(screenState ==0){
     
-    if (menu1.MouseIsOver()) {
+    if (game.MouseIsOver()) {
       // print some text to the console pane if the button is clicked
       println("Clicked: 1");
       screenState = 1;
     }
     
   }else if(screenState == 1){
-    if (menu5.MouseIsOver()) {
+    if (home.MouseIsOver()) {
       // print some text to the console pane if the button is clicked
       println("Clicked: 5");
       screenState = 0;
+      gameState = 0;
     }
-    else if(distance1.MouseIsOver()){
+    /*else if(distance1.MouseIsOver()){
       clearNumber();
       numberState = 1;
       if(!distance1.getIsSelected()){
       distance1.changeSelection();
       }
       println("numberState is 0"); 
-    }
+    }  
     else if(distance2.MouseIsOver()){
       clearNumber();
       numberState = 2;
@@ -110,15 +259,40 @@ void mousePressed(){
       distance2.changeSelection();
       }
       println("numberState is 1"); 
-    }
-    else if(bestaetigen.MouseIsOver()){
-      if(numberState == 1){
-        distanceInt1= Integer.parseInt(getNumber());
-        numberState = 0;
-      }else if(numberState == 2) {
+    }*/
+    else if (next.MouseIsOver()) {
+     if(gameState==0){
+      next();
+     }else if(gameState==1 ){  //&& angle != 0
+      next();
+      numberState = 1;
+      clearNumber();
+     }else if(gameState==2 && next.canBeSelected()){// && distanceInt1 != 0){
+      distanceInt1= Integer.parseInt(getNumber());
+      next();
+      numberState = 2;
+      clearNumber();
+     }else if(gameState==3 && next.canBeSelected()){ // && distanceInt2 != 0){
+       
         distanceInt2= Integer.parseInt(getNumber());
-        numberState = 0;
+      next();
+     
+     }
+     
+    }
+    else if(back.MouseIsOver()) {
+      back();
+      clearNumber();
+      if(gameState==3){
+        distanceInt1=0;
+      }else if(gameState==4){
+        distance2.setLabel(getNumber());
+        distanceInt2=0;
+        println("setback distance 2");
       }
+    }
+    else if(newGame.MouseIsOver()) {
+      gameState = 0;
       clearNumber();
     }
   }
@@ -132,4 +306,39 @@ void mousePressed(){
   
   void changeNumberState(int state){
     numberState = state;
+  }
+  
+  public void setGameState(int i){
+    gameState = i;
+  }
+  
+  void next(){
+     //if(gameState < maxGameStates){
+   gameState +=1;
+    //}
+  }
+  void back(){
+    if(gameState > 0){
+   gameState -=1; 
+    }
+  }
+  void newGame(){
+   gameState = 0; 
+  }
+  
+  int getNumberState(){
+    return numberState;
+  }
+  void setNumberState(int numberState){
+    this.numberState = numberState;
+  }
+  
+  void isNumberEmpty(){
+    if(getNumber() == "" && gameState >=2 && gameState <= 3){
+      next.notSelectable();
+      
+    }else{
+      next.turnSelectable();
+    }
+    
   }

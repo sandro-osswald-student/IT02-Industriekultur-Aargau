@@ -1,7 +1,9 @@
 import controlP5.*;
 
-int xpos = 800;
-int ypos = 500; 
+int xpos = 1000;
+int ypos = 400; 
+
+boolean sensorWasHit = false;
 
 Button num1 = new Button("1",xpos, ypos,100,100);
 Button num2 = new Button("2",xpos+100, ypos,100,100);
@@ -14,6 +16,7 @@ Button num8 = new Button("8",xpos+100, ypos+200,100,100);
 Button num9 = new Button("9",xpos+200, ypos+200,100,100);
 Button num0 = new Button("0",xpos, ypos+300,100,100);
 Button deleteButton = new Button("delete",xpos+100, ypos+300,200,100);
+//Button bestaetigen = new Button("Bestätigen", xpos+350, ypos+300, 200, 100);
 
 
 
@@ -40,6 +43,7 @@ void drawNumPad(){
   num9.Draw();
   num0.Draw();
   deleteButton.Draw();
+  //bestaetigen.Draw();
  
 }
 
@@ -119,7 +123,21 @@ void isNumberHit(){
     // print some text to the console pane if the button is clicked
     number = deleteLastElement(number);
     println(number);
+  }
+  /*
+  if(bestaetigen.MouseIsOver()){
+      if(getNumberState() == 1){
+        distanceInt1= Integer.parseInt(getNumber());
+        setNumberState(0);
+      }else if(numberState == 2) {
+        distanceInt2= Integer.parseInt(getNumber());
+        setNumberState(0);
       }
+      //clearNumber();
+    }
+    */
+    
+    
+    
+    
 }
-
-public 
