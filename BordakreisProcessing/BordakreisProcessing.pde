@@ -33,7 +33,7 @@ void setup() {
   background(255);
   stroke(160);
   fill(0);
-  myAnimation = new Gif(this, "giphy.gif");
+  myAnimation = new Gif(this, "borda.gif");
   myAnimation.play();
   
   //Arduino code  /**/

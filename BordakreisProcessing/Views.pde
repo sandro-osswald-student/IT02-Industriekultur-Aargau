@@ -55,7 +55,7 @@ void secondaryMenu(){
     String s = "Beleuchte zwei Felder mit dem Bordakreis";
     fill(50);
     text(s, x1, y1, x2, y2);  // Text wraps within text box
-    image(myAnimation, 1100, 450);
+    image(myAnimation, 950, 0);
     
     isNumberEmpty();
     
@@ -88,7 +88,7 @@ void secondaryMenu(){
     fill(189,244,121);
     rect(x1, y1, x2, y2);
     textSize(32);
-    String s = "Messe die Distanz 1 vom Bordakreis zum Objekt.";
+    String s = "Messe die Distanz 1 vom Bordakreis zum Objekt und trage sie unten im Feld ein.";
     fill(50);
     text(s, x1, y1, x2, y2);  // Text wraps within text box
     isNumberEmpty();
@@ -105,7 +105,7 @@ void secondaryMenu(){
     fill(189,244,121);
     rect(x1, y1, x2, y2);
     textSize(32);
-    String s = "Messe die Distanz 2 vom Bordakreis zum Objekt";
+    String s = "Messe die Distanz 2 vom Bordakreis zum Objekt und trage sie unten im Feld ein.";
     fill(50);
     text(s, x1, y1, x2, y2);  // Text wraps within text box
     isNumberEmpty();
@@ -180,20 +180,20 @@ void drawInputFields(){
     text("Resultat", 750, 780);
     result.Draw();
     //angle = calculateAngle(0,0);
-    result.setLabel(Integer.toString(calculateResult(distanceInt1, distanceInt2, angle))+"°");
+    result.setLabel(Integer.toString(calculateResult(distanceInt1, distanceInt2, angle))+" cm");
     println(angle);
   }
 }
 
 void fillInputFields(){
   if(numberState == 1){
-  angleField.setLabel(getNumber());
+  angleField.setLabel(getNumber()+ "°");
   }
   if(numberState == 2){
-  distance1.setLabel(getNumber());
+  distance1.setLabel(getNumber()+ " cm");
   }
   if(numberState == 3){
-  distance2.setLabel(getNumber());
+  distance2.setLabel(getNumber()+ " cm");
   }
   
 }
@@ -363,6 +363,10 @@ void mousePressed(){
   }
   void setNumberState(int numberState){
     this.numberState = numberState;
+  }
+  
+  int getGameState(){
+    return gameState;
   }
   
   void isNumberEmpty(){

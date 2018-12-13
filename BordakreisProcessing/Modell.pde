@@ -11,11 +11,11 @@ ellipse(x+262, y+300, 50, 50);
 
 //Sensoren
 fill(255);
-rect(x, y,25, 50);
-rect(x+100, y, 25, 50);
-rect(x+200, y, 25, 50);
+rect(x+50, y,25, 50);
+rect(x+170, y, 25, 50);
 rect(x+300, y, 25, 50);
-rect(x+400, y, 25, 50);
+rect(x+360, y, 25, 50);
+rect(x+450, y, 25, 50);
 
 //Verbindungslinien
 }
@@ -31,73 +31,79 @@ boolean nothingLeftOf(int sensor){
 
 
 void drawLines(int x, int y){
-  
+      textSize(20);
   // Wenn Button1 gedrückt dann Farbe grün einstellen, sonst rot
       if (getSensorValues(1) == 1) {
-        stroke(0, 102, 153);
-        line(x, y, x+262, y+300); 
-        fill(0, 102, 153);
-        textSize(20);
-        text("Distanz 1", x+80, y+150);
-        rect(x, y,25, 50);
+        if(nothingLeftOf(2)){
+          fill(92,107,192);
+          stroke(92,107,192);
+          text("Distanz 1", x+80, y+150);
+        }else{
+          fill(186,104,200);
+          stroke(186,104,200);
+          text("Distanz 2", x+240, y+150);
+        }
+        line(x+50 , y, x+262, y+300); 
+        rect(x+50, y,25, 50);
       }
       else {
       }      
       // Wenn Button2 gedrückt dann Farbe grün einstellen, sonst rot
       if (getSensorValues(2) == 1) {
-        stroke(153, 102, 0);
-        line(x+100, y, x+262, y+300); 
-        fill(153, 102, 0);
-        textSize(20);
         if(nothingLeftOf(2)){
+          fill(92,107,192);
+          stroke(92,107,192);
           text("Distanz 1", x+80, y+150);
         }else{
+          fill(186,104,200);
+          stroke(186,104,200);
           text("Distanz 2", x+240, y+150);
         }
-        
-        rect(x+100, y,25, 50);
+        line(x+170, y, x+262, y+300); 
+        rect(x+170, y,25, 50);
       }
       else {
       } 
       // Wenn Button2 gedrückt dann Farbe grün einstellen, sonst rot
       if (getSensorValues(3) == 1) {
-        stroke(153, 102, 0);
-        line(x+200, y, x+262, y+300); 
-        fill(153, 102, 0);
-        textSize(20);
         if(nothingLeftOf(3)){
+          fill(92,107,192);
+          stroke(92,107,192);
           text("Distanz 1", x+80, y+150);
         }else{
+          fill(186,104,200);
+          stroke(186,104,200);
           text("Distanz 2", x+240, y+150);
         }
-        rect(x+200, y,25, 50);
+        line(x+300, y, x+262, y+300); 
+        rect(x+300, y,25, 50);
       }
       else {
       }
       
       // Wenn Button1 gedrückt dann Farbe grün einstellen, sonst rot
       if (getSensorValues(4) == 1) {
-        stroke(0, 102, 153);
-        line(x+300, y, x+262, y+300); 
-        fill(0, 102, 153);
-        textSize(20);
-        if(nothingLeftOf(2)){
+        if(nothingLeftOf(4)){
+          fill(92,107,192);
+          stroke(92,107,192);
           text("Distanz 1", x+80, y+150);
         }else{
+          fill(186,104,200);
+          stroke(186,104,200);
           text("Distanz 2", x+240, y+150);
         }
-        rect(x+300, y,25, 50);
+        line(x+360, y, x+262, y+300); 
+        rect(x+360, y,25, 50);
       }
       else {
       }      
       // Wenn Button2 gedrückt dann Farbe grün einstellen, sonst rot
       if (getSensorValues(5) == 1) {
-        stroke(153, 102, 0);
-        line(x+400, y, x+262, y+300); 
-        fill(153, 102, 0);
-        textSize(20);
+        fill(186,104,200);
+        stroke(186,104,200);
         text("Distanz 2", x+240, y+150);
-        rect(x+400, y,25, 50);
+        line(x+450, y, x+262, y+300);
+        rect(x+450, y,25, 50);
       }
       else {
       } 
