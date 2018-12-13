@@ -27,6 +27,7 @@ public int S5in = 0;
 // setup() wird einmal zu Beginn dea Programms ausgeführt
 void setup() {
   // Ausgabefenster und Vorder-/Hintergrundfarben definieren
+  textSize(32);
   size(1600,900);
   // Wenn nur ein Wert angegeben wird, wird dieser für alle 3 Farben verwendet, d.h. 255 entspricht RGB(255,255,255)
   background(255);
@@ -69,7 +70,7 @@ if ( myPort.available() > 0)
 { // If data is available,
 portStream = myPort.readStringUntil('\n'); // read it and store it in val
 }
-println(portStream); //print it out in the console
+//println(portStream); //print it out in the console
  
 }
 

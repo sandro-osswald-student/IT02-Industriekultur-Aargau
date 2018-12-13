@@ -23,7 +23,7 @@ Button deleteButton = new Button("delete",xpos+100, ypos+300,200,100);
 String number = "";
 String distanceStr1 = "";
 String distanceStr2 = "";
-String winkel = "";
+String angleStr = "";
 
 
 //ControlP5 cp5;

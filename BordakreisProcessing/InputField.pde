@@ -5,7 +5,7 @@ class InputField {
   float w;    // width of button
   float h;    // height of button
   
-  boolean isSelected= false;
+  boolean isHighlighted= false;
   
   int highColor = 190;
   int normalColor = 218;
@@ -21,20 +21,11 @@ class InputField {
   }
   
   void Draw() {
-  if(isSelected){  
-   if (MouseIsOver()) {
-    fill(0,selectedColorHigh, 0);
-  }else {
-    fill(0, selectedColor, 0);
-  }
-  }else{
-    if (MouseIsOver()) {
-    fill(highColor);
-  }else {
-    fill(normalColor);
-  }
-  }
- 
+    if(isHighlighted){
+      fill(255,202,40);
+    }else{
+      fill(200);
+    }
     stroke(141);
     rect(x, y, w, h, 10);
     textAlign(CENTER, CENTER);
@@ -53,11 +44,11 @@ class InputField {
     label = newLabel;
   }
   
-  boolean getIsSelected(){
-    return isSelected;
+  boolean getIsHighlighted(){
+    return isHighlighted;
   }
   
-  void changeSelection(){
-    isSelected = !isSelected;
+  void setIsHighlighted(boolean b){
+    isHighlighted = b;
   }
 }

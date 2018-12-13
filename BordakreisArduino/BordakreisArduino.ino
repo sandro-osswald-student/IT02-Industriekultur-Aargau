@@ -3,6 +3,11 @@
 #include <TM1637.h>
 #include <SoftwareSerial.h>
 
+
+#define CLK 7//pins definitions for TM1637 and can be changed to other ports
+#define DIO 8
+TM1637 tm1637(CLK,DIO);
+
 SoftwareSerial bt(2,3); // RX, TX
 
 int sensorPin1 = A1; // select the input pin for LDR
@@ -40,6 +45,14 @@ int lightState2 = 0;
 int lightState3 = 0;
 int lightState4 = 0;
 int lightState5 = 0;
+
+String S1string;
+String S2string;
+String S3string;
+String S4string;
+String S5string;
+
+String angleString ="00";
  
 // Enthält den String, der an den PC geschickt wird
 String data = "abbaabbaaaa";
@@ -62,9 +75,23 @@ void setup() {
   pinMode(sensorPin5, INPUT);
   
   pinMode(sensorPinEnv, INPUT);
+
+  tm1637.init();
+  tm1637.set(BRIGHT_TYPICAL);//BRIGHT_TYPICAL = 2,BRIGHT_DARKEST = 0,BRIGHTEST = 7;
 }
 
 void loop() {
+
+  angleString = setAngle();
+
+  int8_t firstDigit = angleString.substring(0,1).toInt();
+  int8_t secondDigit = angleString.substring(1,2).toInt();
+  int8_t ListDisp[4] = {0,0,firstDigit,secondDigit};
+
+tm1637.display(0,ListDisp[0]);
+    tm1637.display(1,ListDisp[1]);
+    tm1637.display(2,ListDisp[2]);
+    tm1637.display(3,ListDisp[3]);
 
 sensorValue1 = analogRead(sensorPin1); // read the value from the sensor 1
 sensorValue2 = analogRead(sensorPin2); // read the value from the sensor 2
@@ -170,13 +197,39 @@ Serial.println(sensorValueEnv);
 // normalizeData fügt die Werte der beiden Buttons zusammen und ergänzt den String um ein eindeutiges Start- und Endezeichen
 String normalizeData(int s1, int s2, int s3, int s4, int s5) {
  
-  String S1string = String(s1);
-  String S2string = String(s2);
-  String S3string = String(s3);
-  String S4string = String(s4);
-  String S5string = String(s5);
+  S1string = String(s1);
+  S2string = String(s2);
+  S3string = String(s3);
+  S4string = String(s4);
+  S5string = String(s5);
  
   // Erzeugt Werte wie S00E, S10E, S01E, S11E
   String ret = String("S") + S1string + S2string + S3string + S4string + S5string +String("E");
   return ret;
+}
+
+String setAngle(){
+  
+if(S1string == "1" && S2string =="1"){
+  return "12";
+}else if(S1string == "1" && S3string =="1"){
+  return "25";
+}else if(S1string == "1" && S4string =="1"){
+  return "32";
+}else if(S1string == "1" && S5string =="1"){
+  return "39";
+}else if(S2string == "1" && S3string =="1"){
+  return "13";
+}else if(S2string == "1" && S4string =="1"){
+  return "20";
+}else if(S2string == "1" && S5string =="1"){
+  return "27";
+}else if(S3string == "1" && S4string =="1"){
+  return "07";
+}else if(S3string == "1" && S5string =="1"){
+  return "14";
+}else if(S4string == "1" && S5string =="1"){
+  return "07";
+}
+return "00";
 }

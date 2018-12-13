@@ -19,9 +19,9 @@ class Button {
   void Draw() {
     
     if (MouseIsOver()) {
-    fill(37, 87, 168);
+    fill(89,144,21);
   } else {
-    fill(112, 159, 234);
+    fill(139,195,74);
   }
   if(isSelectable){
     stroke(141);
