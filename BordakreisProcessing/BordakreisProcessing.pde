@@ -11,7 +11,12 @@ import processing.serial.*;
 // Objekt zur Überwachung eines seriellen Ports erzeugen
 Serial myPort;
 
-Gif myAnimation;
+Gif BordaGif;
+PImage angleImage;
+PImage siloImage;
+PImage barnImage;
+PImage houseImage;
+PImage treeImage;
  
 // String für empfangene Daten
 String portStream = "S00000E";
@@ -26,15 +31,24 @@ public int S5in = 0;
  
 // setup() wird einmal zu Beginn dea Programms ausgeführt
 void setup() {
+  
+  //fullScreen();
+  smooth();
   // Ausgabefenster und Vorder-/Hintergrundfarben definieren
   textSize(32);
-  size(1600,900);
+  size(1600,1000);
   // Wenn nur ein Wert angegeben wird, wird dieser für alle 3 Farben verwendet, d.h. 255 entspricht RGB(255,255,255)
   background(255);
   stroke(160);
   fill(0);
-  myAnimation = new Gif(this, "borda.gif");
-  myAnimation.play();
+  BordaGif = new Gif(this, "borda.gif");
+  angleImage = loadImage("angle.jpg");
+  siloImage = loadImage("silo2.png");
+  treeImage = loadImage("tree.png");
+  barnImage = loadImage("barn.png");
+  houseImage = loadImage("house.png");
+  BordaGif.play();
+  
   
   //Arduino code  /**/
   
@@ -55,6 +69,7 @@ void draw() {
   background(255);
   drawScreen(portStream);
   sensorDetection();
+  println(portStream);
   
 
   if(portStream != null) {

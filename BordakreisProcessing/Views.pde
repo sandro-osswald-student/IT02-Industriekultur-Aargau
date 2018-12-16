@@ -51,11 +51,11 @@ void secondaryMenu(){
     drawLines(100,400);
     fill(189,244,121);
     rect(x1, y1, x2, y2);
-    textSize(32);
-    String s = "Beleuchte zwei Felder mit dem Bordakreis";
+    textSize(26);
+    String s = "Berechne die Distanz zwischen zweier Objekte. Beleuchte zwei Objekte mit dem Bordakreis um sie auszuwählen";
     fill(50);
     text(s, x1, y1, x2, y2);  // Text wraps within text box
-    image(myAnimation, 950, 0);
+    image(BordaGif, 950, 0);
     
     isNumberEmpty();
     
@@ -71,7 +71,12 @@ void secondaryMenu(){
     fill(189,244,121);
     rect(x1, y1, x2, y2);
     textSize(32);
-    String s = "Trage den angezeigten Winkel in das entsprechende Feld ein.";
+    String s = "Trage den angezeigten Winkel mit den Zahlentasten ein.";
+    image(angleImage, 950, 0, 400, 250);
+    textAlign(LEFT);
+    fill(0);
+    text("Winkelanzeige", 950, 280); 
+    textAlign(CENTER);
     fill(50);
     text(s, x1, y1, x2, y2);  // Text wraps within text box
     isNumberEmpty();
@@ -117,7 +122,8 @@ void secondaryMenu(){
     back.Draw();
     drawNumPad();
     drawInputFields();
-    fillInputFields();
+    drawModell(100,400);
+    drawLines(100,400);
     fill(255,202,40);
     rect(x1, y1, x2, y2);
     textSize(32);
@@ -188,12 +194,15 @@ void drawInputFields(){
 void fillInputFields(){
   if(numberState == 1){
   angleField.setLabel(getNumber()+ "°");
+  drawBlinkingLine(100, 800);
   }
   if(numberState == 2){
   distance1.setLabel(getNumber()+ " cm");
+  drawBlinkingLine(250, 800);
   }
   if(numberState == 3){
   distance2.setLabel(getNumber()+ " cm");
+  drawBlinkingLine(450, 800);
   }
   
 }
@@ -258,22 +267,6 @@ void mousePressed(){
       result.setIsHighlighted(false);
       angleField.setIsHighlighted(false);
     }
-    /*else if(distance1.MouseIsOver()){
-      clearNumber();
-      numberState = 1;
-      if(!distance1.getIsSelected()){
-      distance1.changeSelection();
-      }
-      println("numberState is 0"); 
-    }  
-    else if(distance2.MouseIsOver()){
-      clearNumber();
-      numberState = 2;
-      if(!distance2.getIsSelected()){
-      distance2.changeSelection();
-      }
-      println("numberState is 1"); 
-    }*/
     else if (next.MouseIsOver()) {
      if(gameState==0){
       next();
@@ -299,6 +292,7 @@ void mousePressed(){
        result.setIsHighlighted(true);
         distanceInt2= Integer.parseInt(getNumber());
       next();
+      numberState = 4;
      
      }
      
@@ -378,3 +372,5 @@ void mousePressed(){
     }
     
   }
+  
+  

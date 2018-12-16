@@ -17,6 +17,13 @@ rect(x+300, y, 25, 50);
 rect(x+360, y, 25, 50);
 rect(x+450, y, 25, 50);
 
+//icons
+image(treeImage, x+30, y-70);
+image(houseImage, x+150, y-70);
+image(siloImage, x+280, y-70);
+image(barnImage, x+340, y-65);
+image(treeImage, x+430, y-70);
+
 //Verbindungslinien
 }
 
@@ -34,15 +41,10 @@ void drawLines(int x, int y){
       textSize(20);
   // Wenn Button1 gedrückt dann Farbe grün einstellen, sonst rot
       if (getSensorValues(1) == 1) {
-        if(nothingLeftOf(2)){
           fill(92,107,192);
           stroke(92,107,192);
           text("Distanz 1", x+80, y+150);
-        }else{
-          fill(186,104,200);
-          stroke(186,104,200);
-          text("Distanz 2", x+240, y+150);
-        }
+       
         line(x+50 , y, x+262, y+300); 
         rect(x+50, y,25, 50);
       }

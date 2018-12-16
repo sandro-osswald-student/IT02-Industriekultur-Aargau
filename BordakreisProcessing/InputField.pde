@@ -24,12 +24,12 @@ class InputField {
     if(isHighlighted){
       if(getGameState()==2){
         fill(92,107,192);
-      
       }else if(getGameState()==3){
-      fill(186,104,200);
+        fill(186,104,200);
       }else{
-      fill(255,202,40);
+        fill(255,202,40);
      }
+     
     }else{
       fill(200);
     }
@@ -59,3 +59,27 @@ class InputField {
     isHighlighted = b;
   }
 }
+
+public void drawBlinkingLine(float x, float y){
+    stroke(0);
+    float modifier = placementModifier();
+    //println(getNumber().length());
+    if(frameCount%60<30)line(x+45+modifier, y+32, x+45+modifier, y+77);
+  }
+  
+  float placementModifier(){
+    switch(getNumber().length()){
+      case 0: 
+        return 0;
+      case 1: 
+        return 10; 
+      case 2: 
+        return 20;
+      case 3: 
+        return 30; 
+      case 4: 
+        return 40; 
+      default:           
+        return 3000;
+    }
+  }
