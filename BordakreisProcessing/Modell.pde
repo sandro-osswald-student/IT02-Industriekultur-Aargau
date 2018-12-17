@@ -1,12 +1,24 @@
-
-
 void drawModell(int x, int y){
   fill(150);
+  stroke(100);
   
  //Wall
 rect(x, y, 500, 50);
 
+if(getGameState()>=1){
+//Angle
+stroke(8,127,35);
+fill(255);
+strokeWeight(3);
+ellipse(x+262, y+280, 50, 50);
+strokeWeight(1);
+stroke(255);
+rect(x+220, y+270, 100, 100);
+}
+
 //Bordakreis
+fill(150);
+stroke(100);
 ellipse(x+262, y+300, 50, 50);
 
 //Sensoren
@@ -37,7 +49,9 @@ boolean nothingLeftOf(int sensor){
 }
 
 
-void drawLines(int x, int y){
+void drawLines(int x, int y, int gameState){
+      String resultText = "";
+  
       textSize(20);
   // Wenn Button1 gedrückt dann Farbe grün einstellen, sonst rot
       if (getSensorValues(1) == 1) {
@@ -109,6 +123,44 @@ void drawLines(int x, int y){
       }
       else {
       } 
+      
+      if(gameState == 4){
+        fill(255,202,40);
+        if(getSensorValues(1)==1 && getSensorValues(2)== 1){
+          rect(x+75, y, 95, 50);
+          resultText="Distanz zwischen Baum und Haus";
+        }else if(getSensorValues(1)==1 && getSensorValues(3)== 1){
+          rect(x+75, y, 225, 50);
+          resultText="Distanz zwischen Baum und Silo";
+        }else if(getSensorValues(1)==1 && getSensorValues(4)== 1){
+          resultText="Distanz zwischen Baum und Scheune";
+          rect(x+75, y, 285, 50);
+        }else if(getSensorValues(1)==1 && getSensorValues(5)== 1){
+          resultText="Distanz zwischen den zwei Bäumen";
+          rect(x+75, y, 375, 50);
+        }else if(getSensorValues(2)==1 && getSensorValues(3)== 1){
+          resultText="Distanz zwischen Haus und Silo";
+          rect(x+195, y, 105, 50);
+        }else if(getSensorValues(2)==1 && getSensorValues(4)== 1){
+          resultText="Distanz zwischen Haus und Scheune";
+          rect(x+195, y, 165, 50);
+        }else if(getSensorValues(2)==1 && getSensorValues(5)== 1){
+          resultText="Distanz zwischen Haus und Baum";
+          rect(x+195, y, 255, 50);
+        }else if(getSensorValues(3)==1 && getSensorValues(4)== 1){
+          resultText="Distanz zwischen Silo und Scheune";
+          rect(x+325, y, 35, 50);
+        }else if(getSensorValues(3)==1 && getSensorValues(5)== 1){
+          resultText="Distanz zwischen Silo und Baum";
+          rect(x+325, y, 125, 50);
+        }else if(getSensorValues(4)==1 && getSensorValues(5)== 1){
+          resultText="Distanz zwischen Scheune und Baum";
+          rect(x+385, y, 65, 50);
+        }
+        textAlign(LEFT);
+        text(resultText, x+ 520, y+20);
+      }
+
     
   
   

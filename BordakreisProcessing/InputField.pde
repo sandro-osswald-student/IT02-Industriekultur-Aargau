@@ -26,6 +26,8 @@ class InputField {
         fill(92,107,192);
       }else if(getGameState()==3){
         fill(186,104,200);
+      }else if(getGameState()==1){
+        fill(8,127,35);
       }else{
         fill(255,202,40);
      }

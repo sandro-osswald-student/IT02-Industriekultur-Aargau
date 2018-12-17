@@ -33,7 +33,7 @@ Button newGame = new Button("wiederholen",700,50,200,100);
 InputField angleField = new InputField("", 100, 800, 100, 100);
 InputField distance1 = new InputField("", 250, 800, 150, 100);
 InputField distance2 = new InputField("", 450, 800, 150, 100);
-InputField result = new InputField("0°", 700, 800, 100, 100);
+InputField result = new InputField("", 700, 800, 100, 100);
 
 
 
@@ -48,7 +48,7 @@ void secondaryMenu(){
     next.Draw();
     back.Draw();
     drawModell(100,400);
-    drawLines(100,400);
+    drawLines(100,400, gameState);
     fill(189,244,121);
     rect(x1, y1, x2, y2);
     textSize(26);
@@ -67,7 +67,7 @@ void secondaryMenu(){
     drawInputFields();
     fillInputFields();
     drawModell(100,400);
-    drawLines(100,400);
+    drawLines(100,400, gameState);
     fill(189,244,121);
     rect(x1, y1, x2, y2);
     textSize(32);
@@ -89,7 +89,7 @@ void secondaryMenu(){
     drawInputFields();
     fillInputFields();
     drawModell(100,400);
-    drawLines(100,400);
+    drawLines(100,400, gameState);
     fill(189,244,121);
     rect(x1, y1, x2, y2);
     textSize(32);
@@ -106,7 +106,7 @@ void secondaryMenu(){
     drawInputFields();
     fillInputFields();
     drawModell(100,400);
-    drawLines(100,400);
+    drawLines(100,400, gameState);
     fill(189,244,121);
     rect(x1, y1, x2, y2);
     textSize(32);
@@ -123,11 +123,11 @@ void secondaryMenu(){
     drawNumPad();
     drawInputFields();
     drawModell(100,400);
-    drawLines(100,400);
+    drawLines(100,400, gameState);
     fill(255,202,40);
     rect(x1, y1, x2, y2);
     textSize(32);
-    String s = "Lösung: Wurzel aus (" + distanceInt1 + "^2 - 2 * " + distanceInt1 + " * " + distanceInt2 + " * cos(" + angle + ") + " + distanceInt2 + "^2)";
+    String s = "Lösung: Wurzel aus (" + distanceInt1 + "^2 - 2 * " + distanceInt1 + " * " + distanceInt2 + " * cos(" + angle + ") + " + distanceInt2 + "^2) = " + Integer.toString(calculateResult(distanceInt1, distanceInt2, angle))+" cm";
     fill(0);
     text(s, x1, y1, x2, y2);  // Text wraps within text box
   }else if(gameState == 5){
@@ -141,7 +141,7 @@ void secondaryMenu(){
     //text(distanceInt1, 800, 100);
     //text(distanceInt2, 800, 200);
     drawModell(100,400);
-    drawLines(100,400);
+    drawLines(100,400, gameState);
   }
 }
 
@@ -320,6 +320,10 @@ void mousePressed(){
     else if(newGame.MouseIsOver()) {
       gameState = 0;
       clearNumber();
+      distance1.setIsHighlighted(false);
+      distance2.setIsHighlighted(false);
+      result.setIsHighlighted(false);
+      angleField.setIsHighlighted(false);
     }
   }
     
@@ -349,7 +353,12 @@ void mousePressed(){
     }
   }
   void newGame(){
-   gameState = 0; 
+      gameState = 0;
+      clearNumber();
+      distance1.setIsHighlighted(false);
+      distance2.setIsHighlighted(false);
+      result.setIsHighlighted(false);
+      angleField.setIsHighlighted(false);
   }
   
   int getNumberState(){
