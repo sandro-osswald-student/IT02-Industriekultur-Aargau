@@ -119,6 +119,11 @@ void isNumberHit(){
     number += "9";
     println(number);
   }
+  if (num0.MouseIsOver()) {
+    // print some text to the console pane if the button is clicked
+    number += "0";
+    println(number);
+  }
   if (deleteButton.MouseIsOver()) {
     // print some text to the console pane if the button is clicked
     number = deleteLastElement(number);
