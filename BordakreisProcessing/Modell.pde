@@ -13,13 +13,16 @@ strokeWeight(3);
 ellipse(x+262, y+280, 50, 50);
 strokeWeight(1);
 stroke(255);
-rect(x+220, y+270, 100, 100);
+rect(x+220, y+270, 100, 50);
 }
 
 //Bordakreis
-fill(150);
 stroke(100);
+fill(80,127,85);
+ellipse(x+262, y+300, 70, 70);
+fill(8,127,35);
 ellipse(x+262, y+300, 50, 50);
+
 
 //Sensoren
 fill(255);
@@ -53,13 +56,14 @@ void drawLines(int x, int y, int gameState){
       String resultText = "";
   
       textSize(20);
+      strokeWeight(3);
   // Wenn Button1 gedrückt dann Farbe grün einstellen, sonst rot
       if (getSensorValues(1) == 1) {
           fill(92,107,192);
           stroke(92,107,192);
           text("Distanz 1", x+80, y+150);
        
-        line(x+50 , y, x+262, y+300); 
+        line(x+62 , y+50, x+262, y+300); 
         rect(x+50, y,25, 50);
       }
       else {
@@ -69,13 +73,13 @@ void drawLines(int x, int y, int gameState){
         if(nothingLeftOf(2)){
           fill(92,107,192);
           stroke(92,107,192);
-          text("Distanz 1", x+80, y+150);
+          text("Distanz 1", x+160, y+150);
         }else{
           fill(186,104,200);
           stroke(186,104,200);
-          text("Distanz 2", x+240, y+150);
+          text("Distanz 2", x+290, y+150);
         }
-        line(x+170, y, x+262, y+300); 
+        line(x+182, y+50, x+262, y+300); 
         rect(x+170, y,25, 50);
       }
       else {
@@ -85,13 +89,13 @@ void drawLines(int x, int y, int gameState){
         if(nothingLeftOf(3)){
           fill(92,107,192);
           stroke(92,107,192);
-          text("Distanz 1", x+80, y+150);
+          text("Distanz 1", x+180, y+150);
         }else{
           fill(186,104,200);
           stroke(186,104,200);
-          text("Distanz 2", x+240, y+150);
+          text("Distanz 2", x+350, y+150);
         }
-        line(x+300, y, x+262, y+300); 
+        line(x+312, y+50, x+262, y+300); 
         rect(x+300, y,25, 50);
       }
       else {
@@ -102,13 +106,13 @@ void drawLines(int x, int y, int gameState){
         if(nothingLeftOf(4)){
           fill(92,107,192);
           stroke(92,107,192);
-          text("Distanz 1", x+80, y+150);
+          text("Distanz 1", x+210, y+150);
         }else{
           fill(186,104,200);
           stroke(186,104,200);
-          text("Distanz 2", x+240, y+150);
+          text("Distanz 2", x+350, y+150);
         }
-        line(x+360, y, x+262, y+300); 
+        line(x+372, y+50, x+262, y+300); 
         rect(x+360, y,25, 50);
       }
       else {
@@ -117,8 +121,8 @@ void drawLines(int x, int y, int gameState){
       if (getSensorValues(5) == 1) {
         fill(186,104,200);
         stroke(186,104,200);
-        text("Distanz 2", x+240, y+150);
-        line(x+450, y, x+262, y+300);
+        //text("Distanz 2", x+390, y+150);
+        line(x+462, y+50, x+262, y+300);
         rect(x+450, y,25, 50);
       }
       else {
@@ -126,6 +130,7 @@ void drawLines(int x, int y, int gameState){
       
       if(gameState == 4){
         fill(255,202,40);
+        stroke(255,202,40);
         if(getSensorValues(1)==1 && getSensorValues(2)== 1){
           rect(x+75, y, 95, 50);
           resultText="Distanz zwischen Baum und Haus";
@@ -160,6 +165,9 @@ void drawLines(int x, int y, int gameState){
         textAlign(LEFT);
         text(resultText, x+ 520, y+20);
       }
+      
+    stroke(30);
+    strokeWeight(1);
 
     
   

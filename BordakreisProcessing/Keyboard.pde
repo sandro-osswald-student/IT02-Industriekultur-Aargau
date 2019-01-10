@@ -1,7 +1,7 @@
 import controlP5.*;
 
 int xpos = 1000;
-int ypos = 400; 
+int ypos = 580; 
 
 boolean sensorWasHit = false;
 
