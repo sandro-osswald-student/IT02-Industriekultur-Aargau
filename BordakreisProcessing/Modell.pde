@@ -57,6 +57,8 @@ void drawLines(int x, int y, int gameState){
   
       textSize(20);
       strokeWeight(3);
+      
+          
   // Wenn Button1 gedrückt dann Farbe grün einstellen, sonst rot
       if (getSensorValues(1) == 1) {
           fill(92,107,192);

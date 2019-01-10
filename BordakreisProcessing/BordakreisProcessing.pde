@@ -20,10 +20,9 @@ PImage treeImage;
  
 // String für empfangene Daten
 String portStream = "S00000E";
-String portStreamDummy = "empty";
  
 // Zustände der beiden Sensoren
-public int S1in = 0;
+public int S1in = 1;
 public int S2in = 0;
 public int S3in = 0;
 public int S4in = 0;
@@ -69,7 +68,6 @@ void draw() {
   background(255);
   drawScreen(portStream);
   sensorDetection();
-  println(portStream);
   
 
   if(portStream != null) {
@@ -78,7 +76,7 @@ void draw() {
   drawScreen(portStream);
     }
   }
-  drawScreen("");
+  drawScreen("S00000E");
 
 
 if ( myPort.available() > 0)
@@ -106,12 +104,13 @@ public boolean MouseIsOver(int x, int y, int w, int h) {
 public void sensorDetection(){
  if(portStream != null) {
     // Entspricht der Datenblock dem Format "SxxE\r\n"? Wenn ja, dann weiter
+    println(portStream);
       S1in = int(portStream.substring(1,2));   // z.B. bei "S10E" = 1
       S2in = int(portStream.substring(2,3));   // z.B. bei "S10E" = 0 
       S3in = int(portStream.substring(3,4));   // z.B. bei "S10E" = 0 
       S4in = int(portStream.substring(4,5));   // z.B. bei "S10E" = 0 
       S5in = int(portStream.substring(5,6));   // z.B. bei "S10E" = 0 
-    }
+  }
 }
 
 public int getSensorValues(int sensor){

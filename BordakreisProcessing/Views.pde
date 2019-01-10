@@ -1,5 +1,5 @@
 int screenState = 0;
-int gameState = 0;   //0 = trial, 1 = angle, 
+int gameState = 0;   //0 = trial, 1 = angle, 2=distance1, 3=distance, 4 = Result
 int numberState = 0;  // 0 = none, 1 = angle, 2 = distance 1, 3 = distance 2
 static int maxGameStates = 10;
 
@@ -305,7 +305,7 @@ void mousePressed(){
        result.setIsHighlighted(true);
         distanceInt2= Integer.parseInt(getNumber());
       next();
-      numberState = 4;
+      numberState = 0;
      
      }
      
@@ -324,8 +324,8 @@ void mousePressed(){
         distance1.setIsHighlighted(true);
         distance2.setIsHighlighted(false);
       }else if(gameState==3){
-        distance2.setLabel(getNumber());
         distanceInt2=0;
+        numberState = 3;
         distance2.setIsHighlighted(true);
         result.setIsHighlighted(false);
       }

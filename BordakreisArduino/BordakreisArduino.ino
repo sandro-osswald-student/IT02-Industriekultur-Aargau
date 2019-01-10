@@ -118,7 +118,7 @@ sensorDif4 = sensorValue4- sensorValueEnv;
 sensorDif5 = sensorValue5- sensorValueEnv;
 
 
-
+/*
 Serial.print("SensorValue1: ");
 Serial.println(sensorValue1);
 Serial.print("SensorValue2: ");
@@ -132,6 +132,8 @@ Serial.println(sensorValue5);
 
 Serial.print("SensorValueEnv: ");
 Serial.println(sensorValueEnv);
+
+*/
 
   data = normalizeData(lightState1, lightState2, lightState3, lightState4, lightState5);
   // dieser String (z.B. S10E+Zeilwenwechsel) wird dann seriell ausgegeben.
