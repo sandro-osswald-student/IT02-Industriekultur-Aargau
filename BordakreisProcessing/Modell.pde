@@ -1,9 +1,12 @@
+// PImage leftObject = emptyImage;
+// PImage rightObject = ;
+
 void drawModell(int x, int y){
   fill(150);
   stroke(100);
   
  //Wall
-rect(x, y, 500, 50);
+//rect(x, y, 500, 50);
 
 if(getGameState()>=1){
 //Angle
@@ -17,26 +20,27 @@ rect(x+220, y+270, 100, 50);
 }
 
 //Bordakreis
-stroke(100);
-fill(80,127,85);
+noStroke();
+fill(158);
 ellipse(x+262, y+300, 70, 70);
-fill(8,127,35);
+fill(69);
 ellipse(x+262, y+300, 50, 50);
 
 
 //Sensoren
+/*
 fill(255);
 rect(x+50, y,25, 50);
 rect(x+170, y, 25, 50);
 rect(x+300, y, 25, 50);
 rect(x+360, y, 25, 50);
 rect(x+450, y, 25, 50);
-
+*/
 //icons
 image(treeImage, x+30, y-70);
 image(houseImage, x+150, y-70);
 image(siloImage, x+280, y-70);
-image(barnImage, x+340, y-65);
+image(barnImage, x+340, y-70);
 image(treeImage, x+430, y-70);
 
 //Verbindungslinien
@@ -67,6 +71,7 @@ void drawLines(int x, int y, int gameState){
        
         line(x+62 , y+50, x+262, y+300); 
         rect(x+50, y,25, 50);
+        leftObject = loadImage("Icon Tree.png");
       }
       else {
       }      
@@ -76,10 +81,12 @@ void drawLines(int x, int y, int gameState){
           fill(92,107,192);
           stroke(92,107,192);
           text("Distanz 1", x+160, y+150);
+          leftObject = loadImage("Icon House.png");
         }else{
           fill(186,104,200);
           stroke(186,104,200);
           text("Distanz 2", x+290, y+150);
+          rightObject = loadImage("Icon House.png");
         }
         line(x+182, y+50, x+262, y+300); 
         rect(x+170, y,25, 50);

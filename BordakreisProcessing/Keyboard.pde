@@ -3,7 +3,6 @@ import controlP5.*;
 int xpos = 1000;
 int ypos = 580; 
 
-boolean sensorWasHit = false;
 
 Button num1 = new Button("1",xpos, ypos,100,100);
 Button num2 = new Button("2",xpos+100, ypos,100,100);
@@ -28,7 +27,6 @@ String angleStr = "";
 
 //ControlP5 cp5;
  
-String url1, url2;
 
 void drawNumPad(){
   
@@ -141,8 +139,20 @@ void isNumberHit(){
       //clearNumber();
     }
     */
+}
+
+  void keyPressed() {
+    println(getGameState());
     
+    if(getGameState() >= 0 && getGameState() < 4){
     
-    
-    
+      if (key >= '0' && key <= '9') {
+        number +=key;
+      }else if (key == BACKSPACE){
+        number = deleteLastElement(number);
+      }else if (key == ENTER && next.canBeSelected()){
+       next();
+      } 
+  
+    }
 }

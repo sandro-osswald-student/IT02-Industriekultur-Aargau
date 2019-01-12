@@ -1,9 +1,9 @@
 class InputField {
   String label;
-  float x;    // top left corner x position
-  float y;    // top left corner y position
-  float w;    // width of button
-  float h;    // height of button
+  float x;    // left  x position
+  float y;    // left y position
+  float w;    // width of line
+  float h;    // right y position of line
   
   boolean isHighlighted= false;
   
@@ -21,6 +21,7 @@ class InputField {
   }
   
   void Draw() {
+    /*
     if(isHighlighted){
       if(getGameState()==2){
         fill(92,107,192);
@@ -35,20 +36,16 @@ class InputField {
     }else{
       fill(200);
     }
-    stroke(141);
-    rect(x, y, w, h, 10);
+    
+    */
+    stroke(30);
+    strokeWeight(2);
+    line(x, y+h, x+w, y+h);
     textAlign(CENTER, CENTER);
     fill(0);
     text(label, x + (w / 2), y + (h / 2));
   }
-  
-  boolean MouseIsOver() {
-    if (mouseX > x && mouseX < (x + w) && mouseY > y && mouseY < (y + h)) {
-      return true;
-    }
-    return false;
-  }
-  
+    
   void setLabel(String newLabel){
     label = newLabel;
   }
