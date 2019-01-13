@@ -147,7 +147,7 @@ void isNumberHit(){
     if(getGameState() >= 0 && getGameState() < 4){
     
       if (key >= '0' && key <= '9') {
-        number +=key;
+        if(number.length()<= 1 ){number +=key;}
       }else if (key == BACKSPACE){
         number = deleteLastElement(number);
       }else if (key == ENTER && next.canBeSelected()){

@@ -23,6 +23,7 @@ PImage homeImage;
 PImage homeImageHover;
 PImage angleImage;
 PImage emptyImage;
+PImage rulerImage;
 
 PImage leftObject;
 PImage rightObject;
@@ -35,19 +36,19 @@ String portStream = "S00000E";
 PFont openSansC;
  
 // Zustände der beiden Sensoren
-public int S1in = 1;
-public int S2in = 1;
-public int S3in = 0;
-public int S4in = 0;
+public int S1in = 0;
+public int S2in = 0;
+public int S3in = 1;
+public int S4in = 1;
 public int S5in = 0;
  
 // setup() wird einmal zu Beginn dea Programms ausgeführt
 void setup() {
   
   fullScreen();
+  //size(1900, 1000);
   smooth();
   openSansC = loadFont("OpenSans-CondensedLight-48.vlw");
-  //§size(1600,1000);
   
   textFont(openSansC, 32);
   
@@ -65,9 +66,10 @@ void setup() {
   homeImage = loadImage("home.png");
   homeImageHover = loadImage("homeHover.png");
   angleImage = loadImage("angle.png");
-  emptyImage = loadImage("emptyImage.png");
-  leftObject = loadImage("emptyImage.png");
-  rightObject = loadImage("emptyImage.png");
+  emptyImage = loadImage("emptyIcon.png");
+  leftObject = loadImage("emptyIcon.png");
+  rightObject = loadImage("emptyIcon.png");
+  rulerImage = loadImage("Icon Ruler.png");
   BordaGif.play();
   
   
