@@ -1,5 +1,5 @@
-int screenState = 1;
-int gameState = 4;   //0 = trial, 1 = angle, 2=distance1, 3=distance, 4 = Result
+int screenState = 0;
+int gameState = 0;   //0 = trial, 1 = angle, 2=distance1, 3=distance, 4 = Result
 static int maxGameStates = 4;
 
 // Main Menu
