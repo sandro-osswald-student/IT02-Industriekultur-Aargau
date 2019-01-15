@@ -38,15 +38,15 @@ PFont openSansC;
 // Zustände der beiden Sensoren
 public int S1in = 0;
 public int S2in = 0;
-public int S3in = 1;
-public int S4in = 1;
+public int S3in = 0;
+public int S4in = 0;
 public int S5in = 0;
  
 // setup() wird einmal zu Beginn dea Programms ausgeführt
 void setup() {
   
-  fullScreen();
-  //size(1900, 1000);
+  //fullScreen();
+  size(1920, 1080);
   smooth();
   openSansC = loadFont("OpenSans-CondensedLight-48.vlw");
   
@@ -75,7 +75,7 @@ void setup() {
   
   //Arduino code  /**/
   
-  /*
+  
   // Hier muss der Index des Arduino-Ports ausgewählt werden. Notfalls ausprobieren.
   String portName = Serial.list()[0];
   // myPort initialisieren, Übertragungsrate wie bei Arduino Sketch einstellen
@@ -83,7 +83,7 @@ void setup() {
   // Ankommende Zeichen am Port werden solange gebuffert, bis das angebene Zeichen empfangen wird.
   // Damit ist ein Datenblock vollständig übertragen. \n ist das 2. Zeichen eines Zeilenwechsels (\r\n)
   myPort.bufferUntil('\n');
-  */
+  
   
 }
  
@@ -93,7 +93,7 @@ void draw() {
   drawScreen(portStream);
   //sensorDetection();
   
-  /*
+  
   if(portStream != null) {
     // Entspricht der Datenblock dem Format "SxxE\r\n"? Wenn ja, dann weiter
     if (portStream.length() == 6 && portStream.charAt(0) == 'S' && portStream.charAt(6) == 'E') {
@@ -108,7 +108,7 @@ if ( myPort.available() > 0)
 portStream = myPort.readStringUntil('\n'); // read it and store it in val
 }
 //println(portStream); //print it out in the console
- */
+ 
 }
 
  
