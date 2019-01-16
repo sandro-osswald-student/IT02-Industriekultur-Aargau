@@ -41,7 +41,7 @@ public int S2in = 0;
 public int S3in = 0;
 public int S4in = 0;
 public int S5in = 0;
- 
+
 // setup() wird einmal zu Beginn dea Programms ausgeführt
 void setup() {
   fullScreen();

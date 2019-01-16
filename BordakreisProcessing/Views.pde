@@ -26,12 +26,11 @@ int inputFieldPositionY = 890;
 String leftObjectName = "(kein Objekt ausgewählt)";
 String rightObjectName = "(kein Objekt ausgewählt)";
 
-String angleLabel = " °";
-String distance1Label = " cm";
-String distance2Label = " cm";
+String angleLabel = "";
+String distance1Label = "";
+String distance2Label = "";
 
-int screenWidth = 0;
-int screenHeight = 0;
+
 
 RoundButton home;
 RoundButton next;
@@ -40,14 +39,13 @@ RoundButton back;
 RoundButton newGame = new RoundButton("wiederholen",1720,940);
 
 InputField angleField;
-InputField distance1 = new InputField(distance1Label, inputFieldPositionX + 200, inputFieldPositionY, 150, 100);
-InputField distance2 = new InputField(distance2Label, inputFieldPositionX + 450, inputFieldPositionY, 150, 100);
+InputField distance1;
+InputField distance2;
 InputField result = new InputField("", inputFieldPositionX + 700, inputFieldPositionY, 100, 100);
 
 
 
 void mainMenu(){
-  adjustScreenSize();
   background(255);
   game.Draw();
   menu2.notSelectable();
@@ -60,16 +58,23 @@ void mainMenu(){
 
 void secondaryMenu(){
   
+ 
+  
   home = new RoundButton("home",displayWidth/20,displayHeight/10);
   next = new RoundButton("weiter",(displayWidth /10)*5,((displayHeight/10)*9));
   back = new RoundButton("zurück",(displayWidth /20), ((displayHeight/10)*9));
   
   angleField = new InputField(angleLabel, (displayWidth /10)*2, (displayHeight/10)*8, 100, 100);
+  distance1 = new InputField(distance1Label, inputFieldPositionX + 200, inputFieldPositionY, 150, 100);
+  distance2 = new InputField(distance2Label, displayWidth + 450, inputFieldPositionY, 150, 100);
   //background(backgroundPic);
+  
+  fillInputFields();
   
   image(backgroundPic, (displayWidth /10)*6, 0);
   drawTitle();
   drawNavigationList(200, 300);  
+  
   
   //Textbox
   int x1 = 200;
@@ -255,15 +260,15 @@ void drawInputFields(){
 
 void fillInputFields(){
   if(gameState == 1){
-  angleField.setLabel(getNumber()+ angleLabel);
+  angleLabel= getNumber()+ " °";
   drawBlinkingLine(inputFieldPositionX, inputFieldPositionY);
   }
   if(gameState == 2){
-  distance1.setLabel(getNumber()+ distance1Label);
+  distance1Label = getNumber()+ " cm";
   drawBlinkingLine(inputFieldPositionX+200, inputFieldPositionY);
   }
   if(gameState == 3){
-  distance2.setLabel(getNumber()+ distance2Label);
+  distance2Label = getNumber()+ " cm";
   drawBlinkingLine(inputFieldPositionX+450, inputFieldPositionY);
   }
   
@@ -418,8 +423,10 @@ void mousePressed(){
       distance2.setIsHighlighted(false);
       result.setIsHighlighted(false);
       angleField.setIsHighlighted(false);
-      distance1.setLabel(distance1Label);
-      distance2.setLabel(distance2Label);
+      distance1.setLabel(" cm");
+      distance2.setLabel(" cm");
+      distance1Label = (" cm");
+      distance2Label = (" cm");
       
       angle=0;
       distanceInt1=0;
@@ -462,9 +469,6 @@ void mousePressed(){
   
 */
 
-//Method to update screenwith and screenSize
-void adjustScreenSize(){
-  screenWidth = displayWidth;
-  screenHeight = displayHeight;
-}
+
+
   
