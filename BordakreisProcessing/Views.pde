@@ -61,9 +61,11 @@ void mainMenu(){
 void secondaryMenu(){
   
   home = new RoundButton("home",displayWidth/20,displayHeight/10);
-  next = new RoundButton("weiter",(displayWidth /10)*6,((displayHeight/10)*9));
+  next = new RoundButton("weiter",(displayWidth /10)*5,((displayHeight/10)*9));
   back = new RoundButton("zurück",(displayWidth /20), ((displayHeight/10)*9));
-  background(backgroundPic);
+  //background(backgroundPic);
+  
+  image(backgroundPic, (displayWidth /10)*6, 0, (displayWidth /10)*4, displayHeight);
   drawTitle();
   drawNavigationList(200, 300);  
   

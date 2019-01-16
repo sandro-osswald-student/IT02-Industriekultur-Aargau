@@ -49,7 +49,7 @@ void setup() {
   
   textFont(openSansC, 32);
   
-  backgroundPic = loadImage("background.png");
+  backgroundPic = loadImage("backgroundPicture.png");
   // Wenn nur ein Wert angegeben wird, wird dieser für alle 3 Farben verwendet, d.h. 255 entspricht RGB(255,255,255)
   
   stroke(160);
