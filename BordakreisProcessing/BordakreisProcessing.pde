@@ -69,6 +69,8 @@ void setup() {
   rulerImage = loadImage("Icon Ruler.png");
   BordaGif.play();
   
+  backgroundPic.resize((displayWidth/10)*4,displayHeight);
+  
   
   //Arduino code  /**/
   

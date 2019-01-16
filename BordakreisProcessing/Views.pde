@@ -39,7 +39,7 @@ RoundButton next;
 RoundButton back;
 RoundButton newGame = new RoundButton("wiederholen",1720,940);
 
-InputField angleField = new InputField(angleLabel, inputFieldPositionX, inputFieldPositionY, 100, 100);
+InputField angleField;
 InputField distance1 = new InputField(distance1Label, inputFieldPositionX + 200, inputFieldPositionY, 150, 100);
 InputField distance2 = new InputField(distance2Label, inputFieldPositionX + 450, inputFieldPositionY, 150, 100);
 InputField result = new InputField("", inputFieldPositionX + 700, inputFieldPositionY, 100, 100);
@@ -63,9 +63,11 @@ void secondaryMenu(){
   home = new RoundButton("home",displayWidth/20,displayHeight/10);
   next = new RoundButton("weiter",(displayWidth /10)*5,((displayHeight/10)*9));
   back = new RoundButton("zurück",(displayWidth /20), ((displayHeight/10)*9));
+  
+  angleField = new InputField(angleLabel, (displayWidth /10)*2, (displayHeight/10)*8, 100, 100);
   //background(backgroundPic);
   
-  image(backgroundPic, (displayWidth /10)*6, 0, (displayWidth /10)*4, displayHeight);
+  image(backgroundPic, (displayWidth /10)*6, 0);
   drawTitle();
   drawNavigationList(200, 300);  
   

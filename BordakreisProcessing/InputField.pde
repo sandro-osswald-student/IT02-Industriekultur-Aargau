@@ -41,9 +41,9 @@ class InputField {
     stroke(30);
     strokeWeight(2);
     line(x, y+h, x+w, y+h);
-    textAlign(CENTER, CENTER);
+    textAlign(LEFT);
     fill(0);
-    text(label, x + (w / 2), y + (h / 2));
+    text(label, x, y);
   }
     
   void setLabel(String newLabel){
