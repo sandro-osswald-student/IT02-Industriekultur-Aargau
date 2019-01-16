@@ -44,10 +44,7 @@ public int S5in = 0;
  
 // setup() wird einmal zu Beginn dea Programms ausgeführt
 void setup() {
-  
-  //fullScreen();
-  size(1920, 1080);
-  smooth();
+  fullScreen();
   openSansC = loadFont("OpenSans-CondensedLight-48.vlw");
   
   textFont(openSansC, 32);

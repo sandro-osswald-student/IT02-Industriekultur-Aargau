@@ -8,44 +8,47 @@ class RoundButton {
   int normalColor = 218;
   boolean isSelectable = true;
   
-  RoundButton(String labelB, float xpos, float ypos, float widthB, float heightB) {
+  RoundButton(String labelB, float xpos, float ypos) {
     label = labelB;
     x = xpos;
     y = ypos;
-    w = widthB;
-    h = heightB;
+    h = 20;
   }
   
   void Draw() {
-    noStroke();
+    //noStroke();
+    
+    //Testing size of button
+    //rect(x, y-textAscent(), textWidth(label), textAscent());
     
     if (MouseIsOver()) {
     fill(216,215,173);
+    stroke(216,215,173);
   } else {
-    fill(255);
+    //stroke(255);
   }
+  strokeWeight(1);
+  textAlign(LEFT);
   if(isSelectable){
-    ellipse(x, y, w, h);
-    textAlign(CENTER, CENTER);
-    fill(0);
+    if(!MouseIsOver()){
+    fill(69);
+    stroke(69);
+    }
+    line(x, y+3, x+textWidth(label), y+3);
     text(label, x, y);
   }else{
-    fill(255);
-    ellipse(x, y, w, h);
-    textAlign(CENTER, CENTER);
-    fill(240);
+    fill(200);
+    stroke(200);
+    line(x, y, x+textWidth(label), y);
     text(label, x, y);
   }
   }
   
   boolean MouseIsOver() {
-    float disX = x - mouseX;
-    float disY = y - mouseY;
-    if (sqrt(sq(disX) + sq(disY)) < w/2 ) {
+    if (mouseX > x-10 && mouseX < (x + textWidth(label)+10) && mouseY > y-textAscent()-10 && mouseY < y+10 ){
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
   
   void notSelectable(){

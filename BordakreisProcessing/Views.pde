@@ -30,10 +30,14 @@ String angleLabel = " °";
 String distance1Label = " cm";
 String distance2Label = " cm";
 
-Icon home = new Icon("Home",160,70,64,64);
-RoundButton next = new RoundButton("weiter",1720,940,200,200);
-RoundButton back = new RoundButton("zurück",1410,940,200,200);
-RoundButton newGame = new RoundButton("wiederholen",1720,940,200,200);
+int screenWidth = 0;
+int screenHeight = 0;
+
+RoundButton home;
+RoundButton next;
+
+RoundButton back;
+RoundButton newGame = new RoundButton("wiederholen",1720,940);
 
 InputField angleField = new InputField(angleLabel, inputFieldPositionX, inputFieldPositionY, 100, 100);
 InputField distance1 = new InputField(distance1Label, inputFieldPositionX + 200, inputFieldPositionY, 150, 100);
@@ -43,6 +47,7 @@ InputField result = new InputField("", inputFieldPositionX + 700, inputFieldPosi
 
 
 void mainMenu(){
+  adjustScreenSize();
   background(255);
   game.Draw();
   menu2.notSelectable();
@@ -54,11 +59,13 @@ void mainMenu(){
 }
 
 void secondaryMenu(){
+  
+  home = new RoundButton("home",displayWidth/20,displayHeight/10);
+  next = new RoundButton("weiter",(displayWidth /10)*6,((displayHeight/10)*9));
+  back = new RoundButton("zurück",(displayWidth /20), ((displayHeight/10)*9));
   background(backgroundPic);
   drawTitle();
-  drawNavigationList(200, 300);
- 
-  
+  drawNavigationList(200, 300);  
   
   //Textbox
   int x1 = 200;
@@ -450,4 +457,10 @@ void mousePressed(){
   }
   
 */
+
+//Method to update screenwith and screenSize
+void adjustScreenSize(){
+  screenWidth = displayWidth;
+  screenHeight = displayHeight;
+}
   
