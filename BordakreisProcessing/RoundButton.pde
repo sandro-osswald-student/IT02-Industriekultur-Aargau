@@ -27,6 +27,7 @@ class RoundButton {
   } else {
     //stroke(255);
   }
+  textSize(48);
   strokeWeight(1);
   textAlign(LEFT);
   if(isSelectable){

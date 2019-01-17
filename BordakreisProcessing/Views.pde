@@ -54,6 +54,14 @@ void secondaryMenu(){
   int y1 = (displayHeight/10)*3; //400
   int x2 = (displayWidth/10)*4; //800
   int y2 = (displayHeight/10)*4; //400
+  
+  noStroke();
+  fill(255, 200);
+  rect((displayWidth /10)*6 + displayWidth /20, (displayHeight /10)*8, (displayWidth /10)*3, (displayHeight /10)*1);
+  fill(69);
+  textSize(28);
+  textAlign(LEFT);
+  text("Schematisches Modell des Bordakreises zur Vermessung  von Distanzen", (displayWidth /10)*6 + displayWidth /20 + 20, (displayHeight /10)*8+20, (displayWidth /10)*3, (displayHeight /10)*1 );
       
   if(gameState == 0){
     home.Draw();
