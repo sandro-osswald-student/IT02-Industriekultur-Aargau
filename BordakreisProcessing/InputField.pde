@@ -41,7 +41,7 @@ class InputField {
     stroke(30);
     strokeWeight(2);
     line(x, y+h, x+w, y+h);
-    textAlign(LEFT, CENTER);
+    textAlign(CENTER, CENTER);
     fill(0);
     text(label, x + (w / 2), y + (h / 2));
   }
@@ -63,7 +63,7 @@ public void drawBlinkingLine(float x, float y){
     stroke(0);
     float modifier = placementModifier();
     //println(getNumber().length());
-    if(frameCount%60<30)line(x+45+modifier, y+32, x+45+modifier, y+77);
+    if(frameCount%60<30)line(x+modifier+30, y+30, x+modifier+30, y+70);
   }
   
   float placementModifier(){

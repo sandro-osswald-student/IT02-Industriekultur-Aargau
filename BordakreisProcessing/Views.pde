@@ -29,6 +29,9 @@ String rightObjectName = "(kein Objekt ausgewählt)";
 String angleLabel = "";
 String distance1Label = "";
 String distance2Label = "";
+String resultLabel = "";
+
+String s = Integer.toString(displayWidth);
 
 
 
@@ -36,12 +39,12 @@ RoundButton home;
 RoundButton next;
 
 RoundButton back;
-RoundButton newGame = new RoundButton("wiederholen",1720,940);
+RoundButton newGame;
 
 InputField angleField;
 InputField distance1;
 InputField distance2;
-InputField result = new InputField("", inputFieldPositionX + 700, inputFieldPositionY, 100, 100);
+InputField result;
 
 
 
@@ -58,22 +61,24 @@ void mainMenu(){
 
 void secondaryMenu(){
   
- 
-  
   home = new RoundButton("home",displayWidth/20,displayHeight/10);
   next = new RoundButton("weiter",(displayWidth /10)*5,((displayHeight/10)*9));
   back = new RoundButton("zurück",(displayWidth /20), ((displayHeight/10)*9));
+  newGame = new RoundButton("wiederholen",((displayWidth /10)*5)-30,(displayHeight/10)*9);
   
-  angleField = new InputField(angleLabel, (displayWidth /10)*2, (displayHeight/10)*8, 100, 100);
-  distance1 = new InputField(distance1Label, inputFieldPositionX + 200, inputFieldPositionY, 150, 100);
-  distance2 = new InputField(distance2Label, displayWidth + 450, inputFieldPositionY, 150, 100);
+  angleField = new InputField(angleLabel, (displayWidth /10)*1, (displayHeight/10)*7, 100, 100);
+  distance1 = new InputField(distance1Label, (displayWidth /10)*2, (displayHeight/10)*7, 100, 100);
+  distance2 = new InputField(distance2Label, (displayWidth /10)*3, (displayHeight/10)*7, 100, 100);
+  result = new InputField(resultLabel, (displayWidth /10)*4, (displayHeight/10)*7, 100, 100);
   //background(backgroundPic);
+  
+  isNumberEmpty();
   
   fillInputFields();
   
   image(backgroundPic, (displayWidth /10)*6, 0);
   drawTitle();
-  drawNavigationList(200, 300);  
+  drawNavigationList((displayWidth /10)*1 + (displayWidth /20), ((displayHeight/10)*9) -10);  
   
   
   //Textbox
@@ -82,12 +87,21 @@ void secondaryMenu(){
   int x2 = 800;
   int y2 = 400;
   
+  if(next.canBeSelected()){
+    text("next can Be selected", 100, 100);
+  }else{
+      text("next is deactivated", 100, 100);
+  }
+  
+  text(s, 100, 400);
+
+  
+  
     
   if(gameState == 0){
     home.Draw();
     next.Draw();
     back.Draw();
-    back.notSelectable();
     drawModell(modellPositionX,modellPositionY);
     drawLines(modellPositionX,modellPositionY, gameState);
     
@@ -99,14 +113,13 @@ void secondaryMenu(){
     text(s, x1, y1, x2, y2);  // Text wraps within text box
     textSize(32);
     
-    image(BordaGif, 950, 0);
+    image(BordaGif, (displayWidth /10)*1, (displayHeight/10)*5, (displayWidth /10)*4, (displayHeight/10)*3);
     isNumberEmpty();
     
   }else if(gameState == 1){
     home.Draw();
     next.Draw();
-    back.Draw();
-    back.turnSelectable();
+    back.Draw();;
     //drawNumPad();
     drawInputFields();
     fillInputFields();
@@ -210,10 +223,10 @@ void drawInputFields(){
   
   if(gameState == 1){
     //text("Winkel", inputFieldPositionX, inputFieldPositionY-20);
-    image(angleImage, inputFieldPositionX + 20, inputFieldPositionY-100);
+    image(angleImage, (displayWidth /10)*1 + 20, (displayHeight/10)*6);
     
-    image(leftObject, inputFieldPositionX + 240, inputFieldPositionY-100);
-    image(rightObject, inputFieldPositionX + 490, inputFieldPositionY-100);
+    image(leftObject, (displayWidth /10)*2 + 20, (displayHeight/10)*6);
+    image(rightObject, (displayWidth /10)*2 + 20, (displayHeight/10)*6);
     angleField.Draw();
     distance1.Draw();
     distance2.Draw();
@@ -253,7 +266,7 @@ void drawInputFields(){
     result.Draw();
     //angle = calculateAngle(0,0);
     resultInt = calculateResult(distanceInt1, distanceInt2, angle);
-    result.setLabel(resultInt +" cm");
+    resultLabel = resultInt +" cm";
     println(angle);
   }
 }
@@ -261,15 +274,15 @@ void drawInputFields(){
 void fillInputFields(){
   if(gameState == 1){
   angleLabel= getNumber()+ " °";
-  drawBlinkingLine(inputFieldPositionX, inputFieldPositionY);
+  drawBlinkingLine((displayWidth /10)*1 + 5, (displayHeight /10)*7);
   }
   if(gameState == 2){
   distance1Label = getNumber()+ " cm";
-  drawBlinkingLine(inputFieldPositionX+200, inputFieldPositionY);
+  drawBlinkingLine((displayWidth /10)*2, (displayHeight /10)*7);
   }
   if(gameState == 3){
   distance2Label = getNumber()+ " cm";
-  drawBlinkingLine(inputFieldPositionX+450, inputFieldPositionY);
+  drawBlinkingLine((displayWidth /10)*3, (displayHeight /10)*7);
   }
   
 }
@@ -440,12 +453,12 @@ void mousePressed(){
     return gameState;
   }
   
-  void isNumberEmpty(){
+  public boolean isNumberEmpty(){
     if(getNumber() == "" && gameState >=1 && gameState <= 3){
-      next.notSelectable();
+      return false;
       
     }else{
-      next.turnSelectable();
+      return true;
     }
     
   }

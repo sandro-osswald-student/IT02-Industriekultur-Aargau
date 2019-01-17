@@ -36,9 +36,9 @@ String portStream = "S00000E";
 PFont openSansC;
  
 // Zustände der beiden Sensoren
-public int S1in = 0;
+public int S1in = 1;
 public int S2in = 0;
-public int S3in = 0;
+public int S3in = 1;
 public int S4in = 0;
 public int S5in = 0;
 
@@ -54,7 +54,7 @@ void setup() {
   
   stroke(160);
   fill(0);
-  BordaGif = new Gif(this, "borda.gif");
+  BordaGif = new Gif(this, "how to use the Bordakreis.gif");
   anglePicture = loadImage("angle.jpg");
   siloImage = loadImage("Icon Silo.png");
   treeImage = loadImage("Icon Tree.png");
@@ -74,7 +74,7 @@ void setup() {
   
   //Arduino code  /**/
   
-  
+  /*
   // Hier muss der Index des Arduino-Ports ausgewählt werden. Notfalls ausprobieren.
   String portName = Serial.list()[0];
   // myPort initialisieren, Übertragungsrate wie bei Arduino Sketch einstellen
@@ -82,7 +82,7 @@ void setup() {
   // Ankommende Zeichen am Port werden solange gebuffert, bis das angebene Zeichen empfangen wird.
   // Damit ist ein Datenblock vollständig übertragen. \n ist das 2. Zeichen eines Zeilenwechsels (\r\n)
   myPort.bufferUntil('\n');
-  
+  */
   
 }
  
@@ -90,8 +90,8 @@ void setup() {
 void draw() {
   background(255);
   drawScreen(portStream);
-  //sensorDetection();
-  
+  sensorDetection();
+  /*
   
   if(portStream != null) {
     // Entspricht der Datenblock dem Format "SxxE\r\n"? Wenn ja, dann weiter
@@ -107,7 +107,7 @@ if ( myPort.available() > 0)
 portStream = myPort.readStringUntil('\n'); // read it and store it in val
 }
 //println(portStream); //print it out in the console
- 
+
 }
 
  
@@ -115,6 +115,7 @@ portStream = myPort.readStringUntil('\n'); // read it and store it in val
 // Dann wird der Inhalt des seriellen Buffers in portStream geschrieben.
 void serialEvent(Serial myPort) {
   portStream = myPort.readString();
+  */
 }  
 
 public boolean MouseIsOver(int x, int y, int w, int h) {

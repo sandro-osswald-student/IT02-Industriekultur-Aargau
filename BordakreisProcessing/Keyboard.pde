@@ -144,7 +144,7 @@ void isNumberHit(){
   void keyPressed() {
     println(getGameState());
     
-    if(getGameState() >= 0 && getGameState() < 4){
+    if(getGameState() >= 0 && getGameState() < 4 && screenState != 0){
     
       if (key >= '0' && key <= '9') {
         if(number.length()<= 1 ){number +=key;}

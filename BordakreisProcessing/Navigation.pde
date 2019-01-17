@@ -3,9 +3,9 @@ void drawNavigationList(int posX, int posY){
   int x = posX;
   int y = posY;
   
-  int circleSize = displayWidth/30;
+  int circleSize = displayWidth/50;
   
-  int navLength = (displayWidth/10)*4; 
+  int navLength = (displayWidth/10)*3; 
   
   
   fill(255);
