@@ -6,25 +6,13 @@ class RoundButton {
   float h;    // height of button
   int highColor = 190;
   int normalColor = 218;
-  boolean isSelectable;
+  boolean isSelectable = true;
   
   RoundButton(String labelB, float xpos, float ypos) {
     label = labelB;
     x = xpos;
     y = ypos;
     h = 20;
-    
-    if(isNumberEmpty() && labelB == "weiter" && gameState > 0){
-      isSelectable = false;
-    }else{
-     isSelectable = true; 
-    }
-    
-    if (gameState == 0 && labelB == "zurück"){
-      isSelectable = false;
-    }else{
-      isSelectable = true;
-    }
   }
   
   void Draw() {

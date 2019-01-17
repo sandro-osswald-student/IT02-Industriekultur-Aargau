@@ -29,6 +29,17 @@ PImage leftObject;
 PImage rightObject;
 
 PImage backgroundPic;
+
+RoundButton home;
+RoundButton next;
+
+RoundButton back;
+RoundButton newGame;
+
+InputField angleField;
+InputField distance1;
+InputField distance2;
+InputField result;
  
 // String für empfangene Daten
 String portStream = "S00000E";
@@ -76,6 +87,16 @@ void setup() {
   
   backgroundPic.resize((displayWidth/10)*4,displayHeight);
   
+  home = new RoundButton("home",displayWidth/20,displayHeight/10);
+  next = new RoundButton("weiter",(displayWidth /10)*5,((displayHeight/10)*9));
+  back = new RoundButton("zurück",(displayWidth /20), ((displayHeight/10)*9));
+  newGame = new RoundButton("wiederholen",((displayWidth /10)*5)-30,(displayHeight/10)*9);
+  
+  angleField = new InputField(angleLabel, (displayWidth /10)*1, (displayHeight/10)*7, 100, 100);
+  distance1 = new InputField(distance1Label, (displayWidth /10)*2, (displayHeight/10)*7, 100, 100);
+  distance2 = new InputField(distance2Label, (displayWidth /10)*3, (displayHeight/10)*7, 100, 100);
+  result = new InputField("", (displayWidth /10)*4, (displayHeight/10)*7, 100, 100);
+  
   
   //Arduino code  /**/
   
@@ -95,7 +116,7 @@ void setup() {
 void draw() {
   background(255);
   drawScreen(portStream);
-  sensorDetection();
+  //sensorDetection();
   /*
   
   if(portStream != null) {

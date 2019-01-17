@@ -5,7 +5,7 @@ class InputField {
   float w;    // width of line
   float h;    // right y position of line
   
-  boolean isHighlighted= false;
+  boolean isActive= false;
   
   int highColor = 190;
   int normalColor = 218;
@@ -38,11 +38,16 @@ class InputField {
     }
     
     */
-    stroke(30);
+    if(isActive){
+    stroke(69);
+    fill(69);
+    }else{
+    stroke(200);
+    fill(200);
+    }
     strokeWeight(2);
     line(x, y+h, x+w, y+h);
     textAlign(CENTER, CENTER);
-    fill(0);
     text(label, x + (w / 2), y + (h / 2));
   }
     
@@ -50,12 +55,15 @@ class InputField {
     label = newLabel;
   }
   
-  boolean getIsHighlighted(){
-    return isHighlighted;
+  boolean isActive(){
+    return isActive;
   }
   
-  void setIsHighlighted(boolean b){
-    isHighlighted = b;
+  void turnActive(){
+    isActive = true;
+  }
+  void turnInactive(){
+    isActive = false;
   }
 }
 

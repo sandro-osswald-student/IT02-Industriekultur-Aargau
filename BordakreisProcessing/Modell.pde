@@ -7,6 +7,7 @@ int siloPosition = 280;
 int barnPosition = 342;
 int tree2Position = 430;
 
+
 void drawModell(int x, int y){
   fill(150);
   stroke(100);
@@ -68,8 +69,7 @@ boolean nothingLeftOf(int sensor){
 
 
 void drawLines(int x, int y, int gameState){
-      String resultText = "";
-  
+  String resultText = "";
       textSize(32);
       strokeWeight(3);
       stroke(69);
@@ -78,9 +78,13 @@ void drawLines(int x, int y, int gameState){
   // Wenn Button1 gedrückt dann Farbe grün einstellen, sonst rot
       if (getSensorValues(1) == 1) {
         if(gameState >= 2){text(distanceInt1 + "cm", x+80, y+150);}
-       
         line(x+62 , y, x+262, y+300); 
-        leftObject = loadImage("Icon Tree.png");
+        
+        if(gameState >= 2){
+          leftObject = loadImage("Icon Tree.png");
+        }else{
+          leftObject = loadImage("Icon TreeInactive.png");
+        }
         leftObjectName = "dem linken Baum";
       }
       else {
@@ -88,12 +92,20 @@ void drawLines(int x, int y, int gameState){
       // Wenn Button2 gedrückt dann Farbe grün einstellen, sonst rot
       if (getSensorValues(2) == 1) {
         if(nothingLeftOf(2)){
-          if(gameState >= 2){text(distanceInt1 + "cm", x+160, y+150);}
-          leftObject = loadImage("Icon House.png");
+          if(gameState >= 2){
+            text(distanceInt1 + "cm", x+160, y+150);
+            leftObject = loadImage("Icon House.png");
+          }else{
+            leftObject = loadImage("Icon HouseInactive.png");
+          }
           leftObjectName = "dem Haus";
         }else{
-          if(gameState >= 3){text(distanceInt2 + "cm", x+290, y+150);}
+          if(gameState >= 3){
+          text(distanceInt2 + "cm", x+290, y+150);
           rightObject = loadImage("Icon House.png");
+        }else{
+          rightObject = loadImage("Icon HouseInactive.png");
+        }
           rightObjectName = "dem Haus";
         }
         line(x+182, y, x+262, y+300); 
@@ -103,12 +115,20 @@ void drawLines(int x, int y, int gameState){
       // Wenn Button2 gedrückt dann Farbe grün einstellen, sonst rot
       if (getSensorValues(3) == 1) {
         if(nothingLeftOf(3)){
-          if(gameState >= 2){text(distanceInt1 + "cm", x+180, y+150);}
+          if(gameState >= 2){
+          text(distanceInt1 + "cm", x+180, y+150);
           leftObject = loadImage("Icon Silo.png");
+          }else{
+            leftObject = loadImage("Icon SiloInactive.png");
+          }
           leftObjectName = "dem Silo";
         }else{
-          if(gameState >= 3){text(distanceInt2 + "cm", x+350, y+150);}
-          rightObject = loadImage("Icon Silo.png");
+          if(gameState >= 3){
+            text(distanceInt2 + "cm", x+350, y+150);
+            rightObject = loadImage("Icon Silo.png");
+        }else{
+          rightObject = loadImage("Icon SiloInactive.png");
+        }
           rightObjectName = "dem Silo";
         }
         line(x+312, y, x+262, y+300);
@@ -119,12 +139,20 @@ void drawLines(int x, int y, int gameState){
       // Wenn Button1 gedrückt dann Farbe grün einstellen, sonst rot
       if (getSensorValues(4) == 1) {
         if(nothingLeftOf(4)){
-          if(gameState >= 2){text(distanceInt1 + "cm", x+210, y+150);}
-          leftObject = loadImage("Icon Barn.png");
+          if(gameState >= 2){
+            text(distanceInt1 + "cm", x+210, y+150);
+            leftObject = loadImage("Icon Barn.png");
+          }else{
+            leftObject = loadImage("Icon BarnInactive.png");
+          }
           leftObjectName = "der Scheune";
         }else{
-          if(gameState >= 3){text(distanceInt2 + "cm", x+350, y+150);}
+          if(gameState >= 3){
+          text(distanceInt2 + "cm", x+350, y+150);
           rightObject = loadImage("Icon Barn.png");
+        }else{
+          rightObject = loadImage("Icon BarnInactive.png");
+        }
           rightObjectName = "der Scheune";
         }
         line(x+372, y, x+262, y+300); 
@@ -135,7 +163,11 @@ void drawLines(int x, int y, int gameState){
       if (getSensorValues(5) == 1) {
         text(distanceInt2 + "cm", x+390, y+150);
         line(x+462, y, x+262, y+300);
-        rightObject = loadImage("Icon Tree.png");
+        if(gameState >= 2){
+          rightObject = loadImage("Icon Tree.png");
+        }else{
+          rightObject = loadImage("Icon TreeInactive.png");
+        }
         rightObjectName = "dem rechten Baum";
       }
       else {

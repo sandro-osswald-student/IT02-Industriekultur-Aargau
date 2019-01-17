@@ -20,35 +20,13 @@ int modellPositionY = 450;
 
 //SecondaryMenu
 
-int inputFieldPositionX = 200; 
-int inputFieldPositionY = 890;
 
 String leftObjectName = "(kein Objekt ausgewählt)";
 String rightObjectName = "(kein Objekt ausgewählt)";
 
-String angleLabel = "";
-String distance1Label = "";
-String distance2Label = "";
-String resultLabel = "";
-
-String thing = Integer.toString(getWidth());
-
-
-
-
-
-RoundButton home;
-RoundButton next;
-
-RoundButton back;
-RoundButton newGame;
-
-InputField angleField;
-InputField distance1;
-InputField distance2;
-InputField result;
-
-
+String angleLabel = " °";
+String distance1Label = " cm";
+String distance2Label = " cm";
 
 void mainMenu(){
   background(255);
@@ -61,20 +39,8 @@ void mainMenu(){
   menu4.Draw(); 
 }
 
-void secondaryMenu(){
-  
-  home = new RoundButton("home",displayWidth/20,displayHeight/10);
-  next = new RoundButton("weiter",(displayWidth /10)*5,((displayHeight/10)*9));
-  back = new RoundButton("zurück",(displayWidth /20), ((displayHeight/10)*9));
-  newGame = new RoundButton("wiederholen",((displayWidth /10)*5)-30,(displayHeight/10)*9);
-  
-  angleField = new InputField(angleLabel, (displayWidth /10)*1, (displayHeight/10)*7, 100, 100);
-  distance1 = new InputField(distance1Label, (displayWidth /10)*2, (displayHeight/10)*7, 100, 100);
-  distance2 = new InputField(distance2Label, (displayWidth /10)*3, (displayHeight/10)*7, 100, 100);
-  result = new InputField(resultLabel, (displayWidth /10)*4, (displayHeight/10)*7, 100, 100);
+void secondaryMenu(){  
   //background(backgroundPic);
-  
-  isNumberEmpty();
   
   fillInputFields();
   
@@ -84,28 +50,18 @@ void secondaryMenu(){
   
   
   //Textbox
-  int x1 = 200;
-  int y1 = 400;
-  int x2 = 800;
-  int y2 = 400;
-  
-  if(next.canBeSelected()){
-    text("next can Be selected", 100, 100);
-  }else{
-      text("next is deactivated", 100, 100);
-  }
-  
-  text(thing, 100, 400);
-
-  
-  
-    
+  int x1 = (displayWidth /10)*1;  //200
+  int y1 = (displayHeight/10)*3; //400
+  int x2 = (displayWidth/10)*4; //800
+  int y2 = (displayHeight/10)*4; //400
+      
   if(gameState == 0){
     home.Draw();
     next.Draw();
     back.Draw();
-    drawModell(modellPositionX,modellPositionY);
-    drawLines(modellPositionX,modellPositionY, gameState);
+    back.notSelectable();
+    drawModell((displayWidth /10)*6 + displayWidth /15,modellPositionY);
+    drawLines((displayWidth /10)*6 + displayWidth /15,modellPositionY, gameState);
     
     String s = "Ziel: Du möchtest die Distanz zwischen zwei Objekten berechnen. Schritt 1: Wähle frei zwei Objekte aus und beleuchte beide gleichzeitig mit den Lasern (die roten Lampen über den Objekten leuchten auf).";
     stroke(30);
@@ -122,11 +78,12 @@ void secondaryMenu(){
     home.Draw();
     next.Draw();
     back.Draw();;
+    back.turnSelectable();
     //drawNumPad();
     drawInputFields();
     fillInputFields();
-    drawModell(modellPositionX,modellPositionY);
-    drawLines(modellPositionX,modellPositionY, gameState);
+    drawModell((displayWidth /10)*6 + displayWidth /15,modellPositionY);
+    drawLines((displayWidth /10)*6 + displayWidth /15,modellPositionY, gameState);
     
     //image(angleImage, 950, 0, 400, 250);
     //textAlign(LEFT);
@@ -149,8 +106,8 @@ void secondaryMenu(){
     //drawNumPad();
     drawInputFields();
     fillInputFields();
-    drawModell(modellPositionX,modellPositionY);
-    drawLines(modellPositionX,modellPositionY, gameState);
+    drawModell((displayWidth /10)*6 + displayWidth /15,modellPositionY);
+    drawLines((displayWidth /10)*6 + displayWidth /15,modellPositionY, gameState);
     
     String s = "Schritt 3: Messe die Distanz vom Bordakreis zu " + leftObjectName + " mit dem am Bordakreis befestigten Messband. Trage die Distanz in ganzen Zentimetern mit der Tastatur unten ein.";
     stroke(30);
@@ -167,8 +124,8 @@ void secondaryMenu(){
     //drawNumPad();
     drawInputFields();
     fillInputFields();
-    drawModell(modellPositionX,modellPositionY);
-    drawLines(modellPositionX,modellPositionY, gameState);
+    drawModell((displayWidth /10)*6 + displayWidth /15,modellPositionY);
+    drawLines((displayWidth /10)*6 + displayWidth /15,modellPositionY, gameState);
     
     String s = "Schritt 4: Messe die Distanz vom Bordakreis zu " + rightObjectName + " mit dem am Bordakreis befestigten Messband. Trage die Distanz in ganzen Zentimetern mit der Tastatur unten ein.";
     stroke(30);
@@ -186,8 +143,8 @@ void secondaryMenu(){
     back.Draw();
     //drawNumPad();
     drawInputFields();
-    drawModell(modellPositionX,modellPositionY);
-    drawLines(modellPositionX,modellPositionY, gameState);
+    drawModell((displayWidth /10)*6 + displayWidth /15,modellPositionY);
+    drawLines((displayWidth /10)*6 + displayWidth /15,modellPositionY, gameState);
     fill(255,202,40);
     stroke(30);
     textSize(32);
@@ -222,44 +179,33 @@ void drawScreen(String label1){
 void drawInputFields(){
   
   textAlign(LEFT);
+  image(angleImage, (displayWidth /10)*1 + 20, (displayHeight/10)*6);
+  image(leftObject, (displayWidth /10)*2 + 20, (displayHeight/10)*6);
+  image(rightObject, (displayWidth /10)*3 + 20, (displayHeight/10)*6);
   
   if(gameState == 1){
     //text("Winkel", inputFieldPositionX, inputFieldPositionY-20);
-    image(angleImage, (displayWidth /10)*1 + 20, (displayHeight/10)*6);
-    
-    image(leftObject, (displayWidth /10)*2 + 20, (displayHeight/10)*6);
-    image(rightObject, (displayWidth /10)*2 + 20, (displayHeight/10)*6);
     angleField.Draw();
     distance1.Draw();
     distance2.Draw();
     
   }else if(gameState ==2){
-    image(angleImage, inputFieldPositionX + 20, inputFieldPositionY-100);
-    //text("Distanz 1", inputFieldPositionX+200, inputFieldPositionY-20);
-    image(leftObject, inputFieldPositionX + 240, inputFieldPositionY-100);
-    
-    image(rightObject, inputFieldPositionX + 490, inputFieldPositionY-100);
     angleField.Draw();
     distance1.Draw();
     distance2.Draw();
     
   }else if(gameState ==3){
-    image(angleImage, inputFieldPositionX + 20, inputFieldPositionY-100);
-    image(leftObject, inputFieldPositionX + 240, inputFieldPositionY-100);
-    //text("Distanz 2", inputFieldPositionX+450, inputFieldPositionY-20);
-    image(rightObject, inputFieldPositionX + 490, inputFieldPositionY-100);
     angleField.Draw();
     distance1.Draw();
     distance2.Draw();
   }else if(gameState <=4){
-    image(angleImage, inputFieldPositionX + 20, inputFieldPositionY-100);
-    image(leftObject, inputFieldPositionX + 240, inputFieldPositionY-100);
-    //text("Distanz 2", inputFieldPositionX+450, inputFieldPositionY-20);
-    image(rightObject, inputFieldPositionX + 490, inputFieldPositionY-100);
+    image(leftObject,  (displayWidth /10)*4 - displayWidth/60, (displayHeight/10)*6);
+    image(rightObject,  (displayWidth /10)*4 + displayWidth/22, (displayHeight/10)*6);
+    image(rulerImage,  (displayWidth /10)*4 + displayWidth/60, (displayHeight/10)*6);
     
-    image(leftObject, inputFieldPositionX + 660, inputFieldPositionY-100);
-    image(rightObject, inputFieldPositionX + 800, inputFieldPositionY-100);
-    image(rulerImage, inputFieldPositionX +730 , inputFieldPositionY-90);
+    //image(leftObject, inputFieldPositionX + 660, inputFieldPositionY-100);
+    //image(rightObject, inputFieldPositionX + 800, inputFieldPositionY-100);
+    //image(rulerImage, inputFieldPositionX +730 , inputFieldPositionY-90);
     
     //text("Resultat", inputFieldPositionX+700, inputFieldPositionY-20);
     angleField.Draw();
@@ -268,22 +214,22 @@ void drawInputFields(){
     result.Draw();
     //angle = calculateAngle(0,0);
     resultInt = calculateResult(distanceInt1, distanceInt2, angle);
-    resultLabel = resultInt +" cm";
+    result.setLabel(resultInt +" cm");
     println(angle);
   }
 }
 
 void fillInputFields(){
   if(gameState == 1){
-  angleLabel= getNumber()+ " °";
+  angleField.setLabel(getNumber()  + " °");
   drawBlinkingLine((displayWidth /10)*1 + 5, (displayHeight /10)*7);
   }
   if(gameState == 2){
-  distance1Label = getNumber()+ " cm";
+  distance1.setLabel(getNumber()  + " cm");
   drawBlinkingLine((displayWidth /10)*2, (displayHeight /10)*7);
   }
   if(gameState == 3){
-  distance2Label = getNumber()+ " cm";
+  distance2.setLabel(getNumber()  + " cm");
   drawBlinkingLine((displayWidth /10)*3, (displayHeight /10)*7);
   }
   
@@ -361,32 +307,13 @@ void mousePressed(){
       screenState = 0;
       gameState = 0;
       clearNumber();
-      distance1.setIsHighlighted(false);
-      distance2.setIsHighlighted(false);
-      result.setIsHighlighted(false);
-      angleField.setIsHighlighted(false);
     }
     else if (next.MouseIsOver()&& gameState < 4) {
       next();
     }
     else if(back.MouseIsOver()) {
       back();
-      clearNumber();
-      if(gameState==1){
-        angle=0;
-        angleField.setIsHighlighted(true);
-        distance1.setIsHighlighted(false);
-        distance1.setLabel(distance1Label);
-      }else if(gameState==2){
-        distanceInt1=0;
-        distance1.setIsHighlighted(true);
-        distance2.setIsHighlighted(false);
-        distance2.setLabel(distance2Label);
-      }else if(gameState==3){
-        distanceInt2=0;
-        distance2.setIsHighlighted(true);
-        result.setIsHighlighted(false);
-      }
+      
     }
     else if(newGame.MouseIsOver()) {
       if(gameState==maxGameStates){
@@ -404,29 +331,40 @@ void mousePressed(){
   void next(){
    
    if(gameState==0){
-      angleField.setIsHighlighted(true);
       clearNumber();
+      angleField.turnActive();
      }else if(gameState==1 && next.canBeSelected()){  //&& angle != 0
       angle= Integer.parseInt(getNumber());
-      distance1.setIsHighlighted(true);
-      angleField.setIsHighlighted(false);
       clearNumber();
+      distance1.turnActive();
      }else if(gameState==2 && next.canBeSelected()){// && distanceInt1 != 0){
       distanceInt1= Integer.parseInt(getNumber());
-      distance1.setIsHighlighted(false);
-      distance2.setIsHighlighted(true);
       clearNumber();
+      distance2.turnActive();
      }else if(gameState==3 && next.canBeSelected()){ // && distanceInt2 != 0){
-      distance2.setIsHighlighted(false);
-      result.setIsHighlighted(true);
       distanceInt2= Integer.parseInt(getNumber());
       clearNumber();
+      result.turnActive();
      }
      if(gameState < maxGameStates && next.canBeSelected()){
      gameState +=1;
      }
   }
   void back(){
+    clearNumber();
+      if(gameState==2){
+        angle=0;
+        distance1.turnInactive();
+        distance1.setLabel(distance1Label);
+      }else if(gameState==3){
+        distanceInt1=0;
+        distance2.turnInactive();
+        distance2.setLabel(distance2Label);
+      }else if(gameState==4){
+        distanceInt2=0;
+        
+      }
+    
     if(gameState > 0){
    gameState -=1; 
     }
@@ -434,10 +372,6 @@ void mousePressed(){
   void newGame(){
       gameState = 0;
       clearNumber();
-      distance1.setIsHighlighted(false);
-      distance2.setIsHighlighted(false);
-      result.setIsHighlighted(false);
-      angleField.setIsHighlighted(false);
       distance1.setLabel(" cm");
       distance2.setLabel(" cm");
       distance1Label = (" cm");
@@ -455,12 +389,12 @@ void mousePressed(){
     return gameState;
   }
   
-  public boolean isNumberEmpty(){
+  void isNumberEmpty(){
     if(getNumber() == "" && gameState >=1 && gameState <= 3){
-      return false;
+      next.notSelectable();
       
     }else{
-      return true;
+      next.turnSelectable();
     }
     
   }
