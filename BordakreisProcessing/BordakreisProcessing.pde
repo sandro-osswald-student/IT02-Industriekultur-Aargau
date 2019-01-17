@@ -33,6 +33,8 @@ PImage backgroundPic;
 // String für empfangene Daten
 String portStream = "S00000E";
 
+int sWidth;
+
 PFont openSansC;
  
 // Zustände der beiden Sensoren
@@ -44,7 +46,10 @@ public int S5in = 0;
 
 // setup() wird einmal zu Beginn dea Programms ausgeführt
 void setup() {
-  fullScreen();
+  //fullScreen();
+  size(displayWidth, displayHeight);
+  sWidth = displayWidth;
+  
   openSansC = loadFont("OpenSans-CondensedLight-48.vlw");
   
   textFont(openSansC, 32);
@@ -153,4 +158,8 @@ public int getSensorValues(int sensor){
     return 0;
   }
 
+}
+
+public int getWidth(){
+  return sWidth;
 }

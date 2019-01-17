@@ -31,7 +31,9 @@ String distance1Label = "";
 String distance2Label = "";
 String resultLabel = "";
 
-String s = Integer.toString(displayWidth);
+String thing = Integer.toString(getWidth());
+
+
 
 
 
@@ -93,7 +95,7 @@ void secondaryMenu(){
       text("next is deactivated", 100, 100);
   }
   
-  text(s, 100, 400);
+  text(thing, 100, 400);
 
   
   
