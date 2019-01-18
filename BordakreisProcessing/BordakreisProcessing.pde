@@ -50,8 +50,8 @@ PFont openSansC;
 // State of the 5 sensors
 public int S1in = 0;
 public int S2in = 0;
-public int S3in = 1;
-public int S4in = 1;
+public int S3in = 0;
+public int S4in = 0;
 public int S5in = 0;
 
 // setup() wird einmal zu Beginn dea Programms ausgeführt
