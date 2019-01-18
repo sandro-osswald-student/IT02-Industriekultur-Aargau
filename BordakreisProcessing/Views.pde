@@ -1,23 +1,17 @@
-int screenState = 0;
+int screenState = 0;  //0 = main menu, 1 = game
 int gameState = 0;   //0 = trial, 1 = angle, 2=distance1, 3=distance, 4 = Result
 static int maxGameStates = 4;
 
-// Main Menu
-
-
-
+//input
 int angle = 0;
 int distanceInt1 = 0;
 int distanceInt2 = 0;
 int resultInt = 0;
 
-int modellPositionX = 1300;
+//y position of modell
 int modellPositionY = 450;
 
-
-//SecondaryMenu
-
-
+//object names used in text
 String leftObjectName = "(kein Objekt ausgewählt)";
 String rightObjectName = "(kein Objekt ausgewählt)";
 
@@ -25,25 +19,24 @@ String angleLabel = " °";
 String distance1Label = " cm";
 String distance2Label = " cm";
 
+//draws main menu with 4 buttons
 void mainMenu(){
-  //image(backgroundPicMain, 0, 0);
-  
-  
   
   game.Draw();
-  menu2.notSelectable();
+  menu2.notSelectable();  //greyes out unselectable buttons to not confuse test users.
   menu3.notSelectable();
   menu4.notSelectable();
   menu2.Draw();
   menu3.Draw();
   menu4.Draw(); 
 }
-
+//draw game screens 
 void secondaryMenu(){ 
   fillInputFields();
   
-  image(dufourMap, (displayWidth /10)*6, 0);
-  drawTitle();
+  
+  image(dufourMap, (displayWidth /10)*6, 0);  //displays dufour map on right site of screen
+  drawTitle();  //draws title text
   drawNavigationList((displayWidth /10)*1 + (displayWidth /20), ((displayHeight/10)*9) -10);  
   
   
@@ -53,15 +46,11 @@ void secondaryMenu(){
   int x2 = (displayWidth/10)*4; //800
   int y2 = (displayHeight/10)*4; //400
   
-  noStroke();
-  fill(255, 200);
-  rect((displayWidth /10)*6 + displayWidth /20, (displayHeight /10)*8, (displayWidth /10)*3, (displayHeight /10)*1);
-  fill(69);
-  textSize(28);
-  textAlign(CENTER);
-  text("Schematisches Modell des Bordakreises zur Vermessung  von Distanzen.", 
-  (displayWidth /10)*6 + displayWidth /20 + 20, (displayHeight /10)*8+20, (displayWidth /10)*3-40, (displayHeight /10)*1 );
+  drawTextBox();
+  
   isNumberEmpty();
+   
+      //draws the four diffrent screens depending on the value in gameState
       
   if(gameState == 0){
     home.Draw();
@@ -87,16 +76,11 @@ void secondaryMenu(){
     next.Draw();
     back.Draw();;
     back.turnSelectable();
-    //drawNumPad();
     drawInputFields();
     fillInputFields();
     drawModell((displayWidth /10)*6 + displayWidth /15,modellPositionY);
     drawLines((displayWidth /10)*6 + displayWidth /15,modellPositionY, gameState);
     
-    //image(angleImage, 950, 0, 400, 250);
-    //textAlign(LEFT);
-    //fill(0);
-    //text("Winkelanzeige", 950, 280); 
     String s = "Schritt 2: Trage den an der Wand angezeigten Winkel mit der Tastatur rechts unten ein.";
     stroke(30);
     fill(50);
@@ -106,12 +90,10 @@ void secondaryMenu(){
     isNumberEmpty();
     
     
-    
   }else if(gameState == 2){
     home.Draw();
     next.Draw();
     back.Draw();
-    //drawNumPad();
     drawInputFields();
     fillInputFields();
     drawModell((displayWidth /10)*6 + displayWidth /15,modellPositionY);
@@ -129,7 +111,6 @@ void secondaryMenu(){
     home.Draw();
     next.Draw();
     back.Draw();
-    //drawNumPad();
     drawInputFields();
     fillInputFields();
     drawModell((displayWidth /10)*6 + displayWidth /15,modellPositionY);
@@ -146,10 +127,8 @@ void secondaryMenu(){
     
   }else if(gameState == 4){
     home.Draw();
-    //next.Draw();
     newGame.Draw();
     back.Draw();
-    //drawNumPad();
     drawInputFields();
     drawModell((displayWidth /10)*6 + displayWidth /15,modellPositionY);
     drawLines((displayWidth /10)*6 + displayWidth /15,modellPositionY, gameState);
@@ -175,6 +154,7 @@ void secondaryMenu(){
   }
 }
 
+//draws either main menu or the game Menu depending on value of screenState
 void drawScreen(){
   if (screenState == 0){
     mainMenu();
@@ -182,6 +162,17 @@ void drawScreen(){
   if(screenState == 1){
     secondaryMenu();   
   }
+}
+
+void drawTextBox(){
+  noStroke();
+  fill(255, 200);
+  rect((displayWidth /10)*6 + displayWidth /20, (displayHeight /10)*8, (displayWidth /10)*3, (displayHeight /10)*1);
+  fill(69);
+  textSize(28);
+  textAlign(CENTER);
+  text("Schematisches Modell des Bordakreises zur Vermessung  von Distanzen.", 
+  (displayWidth /10)*6 + displayWidth /20 + 20, (displayHeight /10)*8+20, (displayWidth /10)*3-40, (displayHeight /10)*1 );
 }
 
 void drawInputFields(){
@@ -210,17 +201,10 @@ void drawInputFields(){
     image(leftObject,  (displayWidth /10)*4 - displayWidth/60, (displayHeight/10)*6);
     image(rightObject,  (displayWidth /10)*4 + displayWidth/22, (displayHeight/10)*6);
     image(rulerImage,  (displayWidth /10)*4 + displayWidth/60, (displayHeight/10)*6);
-    
-    //image(leftObject, inputFieldPositionX + 660, inputFieldPositionY-100);
-    //image(rightObject, inputFieldPositionX + 800, inputFieldPositionY-100);
-    //image(rulerImage, inputFieldPositionX +730 , inputFieldPositionY-90);
-    
-    //text("Resultat", inputFieldPositionX+700, inputFieldPositionY-20);
     angleField.Draw();
     distance1.Draw();
     distance2.Draw();
     result.Draw();
-    //angle = calculateAngle(0,0);
     resultInt = calculateResult(distanceInt1, distanceInt2, angle);
     result.setLabel(resultInt +" cm");
     println(angle);
@@ -242,8 +226,8 @@ void fillInputFields(){
   }
   
 }
-
-void drawTitle(){
+//draws Titel at fixed position
+void drawTitle(){ 
   String s1 = "Exponat Bordakreis";
   String s2 = "wie früher vermessen wurde";
     stroke(30);
@@ -260,7 +244,7 @@ void drawTitle(){
     line(350, 180, 850, 180 );
 }
   
-
+//takes input value from universal number and saves it into specific value of angle and the two distances
 void safeNumberInDistanceInt(){
   if(gameState == 1){
     angle= Integer.parseInt(getNumber());
@@ -273,25 +257,7 @@ void safeNumberInDistanceInt(){
   }
 }
 
-/*
-int calculateAngle(int firstAngle, int secondAngle){
-  
-  if(portStream != null) {
-    // Entspricht der Datenblock dem Format "SxxE\r\n"? Wenn ja, dann weiter
-    if (portStream.length() == 6 && portStream.charAt(0) == 'S' && portStream.charAt(3) == 'E') {
-      // 2. und 3. Zeichen auslesen
-      firstAngle = int(portStream.substring(1,2));   // z.B. bei "S10E" = 1
-      secondAngle = int(portStream.substring(2,3));   // z.B. bei "S10E" = 0
-    }
-  }
-  if(firstAngle ==1 || firstAngle ==2 && secondAngle ==1 || secondAngle ==2 && firstAngle !=secondAngle){
-    return 10;
-  }
-  return 0;
-}
-
-*/
-
+//calculates result baseon on input of user
 int calculateResult(int distanceValue1, int distanceValue2, int angle){
   if(angle != 0 && distanceValue1 != 0 && distanceValue2 != 0){
   return int(sqrt(((sq(distanceValue1)) + (sq(distanceValue2))) -(2 * distanceValue1 * distanceValue2 *cos(radians(angle)))));
@@ -299,7 +265,7 @@ int calculateResult(int distanceValue1, int distanceValue2, int angle){
   return 0;
 }
 
-
+//checks if mouse is over button every time mouse is pressed, calls method dependend on which button is pressed
 void mousePressed(){
   if(screenState ==0){
     
@@ -331,13 +297,12 @@ void mousePressed(){
   }    
   }
   
-  
   public void setGameState(int i){
     gameState = i;
   }
   
+  //method for next button: activating new input fields and result
   void next(){
-   
    if(gameState==0){
       clearNumber();
       angleField.turnActive();
@@ -358,6 +323,8 @@ void mousePressed(){
      gameState +=1;
      }
   }
+  
+  //method of back button
   void back(){
     clearNumber();
       if(gameState==2){
@@ -377,6 +344,8 @@ void mousePressed(){
    gameState -=1; 
     }
   }
+  
+  //resets all values when new game button is pressed
   void newGame(){
       gameState = 0;
       clearNumber();
@@ -388,15 +357,12 @@ void mousePressed(){
       angle=0;
       distanceInt1=0;
       distanceInt2=0;
-      
   }
-  
-  
   
   int getGameState(){
     return gameState;
   }
-  
+  //checks if number is empty: used to determine if next can be selected or not
   void isNumberEmpty(){
     
     if(getNumber().length() == 0 && getGameState() > 0){
@@ -408,26 +374,6 @@ void mousePressed(){
     }
     
   }
-  /*
-  void getRightIconNmae(){
-    switch(getRightObject()){
-      case "leftTree": 
-        return 0;
-      case 1: 
-        return 10; 
-      case 2: 
-        return 20;
-      case 3: 
-        return 30; 
-      case 4: 
-        return 40; 
-      default:           
-        return 3000;
-    }
-  }
-  
-*/
-
 
 
   

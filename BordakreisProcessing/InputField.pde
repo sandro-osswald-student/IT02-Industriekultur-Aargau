@@ -1,3 +1,5 @@
+//Class InputField handles input for angle, distance1 and distance2
+
 class InputField {
   String label;
   float x;    // left  x position
@@ -5,13 +7,9 @@ class InputField {
   float w;    // width of line
   float h;    // right y position of line
   
-  boolean isActive= false;
+  boolean isActive= false;  //isActive=true -> inputfield is displayed as normal, isActive=false -> inputfield is greyed out
   
-  int highColor = 190;
-  int normalColor = 218;
-  int selectedColor = 190;
-  int selectedColorHigh = 160;
-  
+  //Constructor
   InputField(String labelB, float xpos, float ypos, float widthB, float heightB) {
     label = labelB;
     x = xpos;
@@ -21,34 +19,17 @@ class InputField {
   }
   
   void Draw() {
-    /*
-    if(isHighlighted){
-      if(getGameState()==2){
-        fill(92,107,192);
-      }else if(getGameState()==3){
-        fill(186,104,200);
-      }else if(getGameState()==1){
-        fill(8,127,35);
-      }else{
-        fill(255,202,40);
-     }
-     
-    }else{
+    if(isActive){  //true = sets colour to nomral dark grey
+      stroke(69);
+      fill(69);
+    }else{  //else sets colour to light grey
+      stroke(200);
       fill(200);
     }
-    
-    */
-    if(isActive){
-    stroke(69);
-    fill(69);
-    }else{
-    stroke(200);
-    fill(200);
-    }
     strokeWeight(2);
-    line(x, y+h, x+w, y+h);
-    textAlign(CENTER, CENTER);
-    text(label, x + (w / 2), y + (h / 2));
+    line(x, y+h, x+w, y+h);  //sets line below input number
+    textAlign(CENTER, CENTER);  //sets alignment of displayed value
+    text(label, x + (w / 2), y + (h / 2));  //sets text of displayed value
   }
     
   void setLabel(String newLabel){
@@ -67,13 +48,13 @@ class InputField {
   }
 }
 
-public void drawBlinkingLine(float x, float y){
+//draws blinking line next to value, indicating that any input over keyboard is written at this position
+public void drawBlinkingLine(float x, float y){  
     stroke(0);
-    float modifier = placementModifier();
-    //println(getNumber().length());
-    if(frameCount%60<30)line(x+modifier+30, y+30, x+modifier+30, y+70);
+    float modifier = placementModifier(); //modifier changes position of line with new input
+    if(frameCount%60<30)line(x+modifier+30, y+30, x+modifier+30, y+70); //draws line on average every second frame, makes line blinking
   }
-  
+  //adds modifier to x axis of blinking line, for it to stay with the written text, works up to 4 digits of input
   float placementModifier(){
     switch(getNumber().length()){
       case 0: 
@@ -87,6 +68,6 @@ public void drawBlinkingLine(float x, float y){
       case 4: 
         return 40; 
       default:           
-        return 3000;
+        return 3000; // if input size larger than 4, line will be pushed ofscreen
     }
   }

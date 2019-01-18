@@ -25,16 +25,16 @@ PImage rightObject;
 PImage dufourMap;
 
 //Mainscreen buttons
-RoundButton game;
-RoundButton menu2;
-RoundButton menu3;
-RoundButton menu4;
+Button game;
+Button menu2;
+Button menu3;
+Button menu4;
 
 //Game buttons
-RoundButton home;
-RoundButton next;
-RoundButton back;
-RoundButton newGame;
+Button home;
+Button next;
+Button back;
+Button newGame;
 
 //Inputfields objects for entering values
 InputField angleField;
@@ -48,10 +48,10 @@ String portStream = "S00000E";
 PFont openSansC;
  
 // State of the 5 sensors
-public int S1in = 1;
+public int S1in = 0;
 public int S2in = 0;
 public int S3in = 1;
-public int S4in = 0;
+public int S4in = 1;
 public int S5in = 0;
 
 // setup() wird einmal zu Beginn dea Programms ausgeführt
@@ -84,15 +84,15 @@ void setup() {
   dufourMap.resize((displayWidth/10)*4,displayHeight);
   
   //creates all button and Inputfield objects with Position based on screensize
-  game = new RoundButton("Spiel", (displayWidth /10)*3 - displayWidth /20,((displayHeight/10)*3));
-  menu2 = new RoundButton("menu2", (displayWidth /10)*7 - displayWidth /20,((displayHeight/10)*3));
-  menu3 = new RoundButton("menu3", (displayWidth /10)*3 - displayWidth /20,((displayHeight/10)*6));
-  menu4 = new RoundButton("menu4", (displayWidth /10)*7 - displayWidth /20,((displayHeight/10)*6));
+  game = new Button("Spiel", (displayWidth /10)*3 - displayWidth /20,((displayHeight/10)*3));
+  menu2 = new Button("menu2", (displayWidth /10)*7 - displayWidth /20,((displayHeight/10)*3));
+  menu3 = new Button("menu3", (displayWidth /10)*3 - displayWidth /20,((displayHeight/10)*6));
+  menu4 = new Button("menu4", (displayWidth /10)*7 - displayWidth /20,((displayHeight/10)*6));
   
-  home = new RoundButton("home",displayWidth/20,displayHeight/10);
-  next = new RoundButton("weiter",(displayWidth /10)*5,((displayHeight/10)*9));
-  back = new RoundButton("zurück",(displayWidth /20), ((displayHeight/10)*9));
-  newGame = new RoundButton("wiederholen",((displayWidth /10)*5)-30,(displayHeight/10)*9);
+  home = new Button("home",displayWidth/20,displayHeight/10);
+  next = new Button("weiter",(displayWidth /10)*5,((displayHeight/10)*9));
+  back = new Button("zurück",(displayWidth /20), ((displayHeight/10)*9));
+  newGame = new Button("wiederholen",((displayWidth /10)*5)-30,(displayHeight/10)*9);
   
   angleField = new InputField(angleLabel, (displayWidth /10)*1, (displayHeight/10)*7, 100, 100);
   distance1 = new InputField(distance1Label, (displayWidth /10)*2, (displayHeight/10)*7, 100, 100);
@@ -115,7 +115,7 @@ void setup() {
 void draw() {
   background(255);  //background for Processing is set to colour white (rgb)
   drawScreen();  //drawScreen method in Views is called, responsible for displaying all GUI except white background
-  //sensorDetection(); //catches String with sensor states from Arudion 
+  sensorDetection(); //catches String with sensor states from Arudion 
   
 if ( myPort.available() > 0){   // If data is available,
   portStream = myPort.readStringUntil('\n'); // read it and store it in val

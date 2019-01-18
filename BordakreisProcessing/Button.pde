@@ -4,41 +4,43 @@ class Button {
   float y;    // top left corner y position
   float w;    // width of button
   float h;    // height of button
-  boolean isSelectable = true;
+  boolean isSelectable;  //if button can be selected and highlighted or not
   
-  Button(String labelB, float xpos, float ypos, float widthB, float heightB) {
+  Button(String labelB, float xpos, float ypos) {
     label = labelB;
     x = xpos;
     y = ypos;
-    w = widthB;
-    h = heightB;
+    h = 20;
+    isSelectable = true;
   }
   
   void Draw() {
-    
-    if (MouseIsOver()) {
-    fill(216,215,173);
-  } else {
+    if (MouseIsOver()) {  //draws button in gold colour when hovered above
+    fill(216,215,173);  
+    stroke(216,215,173);
+    } else {
+    }
+  textSize(48);
+  strokeWeight(1);
+  textAlign(LEFT);
+  if(isSelectable){ //draws button in dark grey colour if selectable
+    if(!MouseIsOver()){ //draws button in standard colour (dark grey) when not hovered above
     fill(69);
-  }
-  if(isSelectable){
-    stroke(255);
-    rect(x, y, w, h, 10);
-    textAlign(CENTER, CENTER);
-    fill(255);
-    text(label, x + (w / 2), y + (h / 2));
-  }else{
-    stroke(170);
+    stroke(69);
+    }
+    line(x, y+3, x+textWidth(label), y+3);    
+    text(label, x, y);
+  }else{  //makes button greyed out if not selectable
     fill(200);
-    rect(x, y, w, h, 10);
-    textAlign(CENTER, CENTER);
-    fill(150);
-    text(label, x + (w / 2), y + (h / 2));
-  }
+    stroke(200);
+    line(x, y, x+textWidth(label), y);
+    text(label, x, y);
+    }
   }
   
+  //checks if mouse is above button
   boolean MouseIsOver() {
-    if (mouseX > x && mouseX < (x + w) && mouseY > y && mouseY < (y + h)) {
+    if (mouseX > x-10 && mouseX < (x + textWidth(label)+10) && mouseY > y-textAscent()-10 && mouseY < y+10 ){    //decides clickable area with width and height (textAscent) of text
       return true;
     }
     return false;
