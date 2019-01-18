@@ -6,13 +6,14 @@ class RoundButton {
   float h;    // height of button
   int highColor = 190;
   int normalColor = 218;
-  boolean isSelectable = true;
+  boolean isSelectable;
   
   RoundButton(String labelB, float xpos, float ypos) {
     label = labelB;
     x = xpos;
     y = ypos;
     h = 20;
+    isSelectable = true;
   }
   
   void Draw() {

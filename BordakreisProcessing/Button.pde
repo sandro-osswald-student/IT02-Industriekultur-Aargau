@@ -4,8 +4,6 @@ class Button {
   float y;    // top left corner y position
   float w;    // width of button
   float h;    // height of button
-  int highColor = 190;
-  int normalColor = 218;
   boolean isSelectable = true;
   
   Button(String labelB, float xpos, float ypos, float widthB, float heightB) {
@@ -19,15 +17,15 @@ class Button {
   void Draw() {
     
     if (MouseIsOver()) {
-    fill(89,144,21);
+    fill(216,215,173);
   } else {
-    fill(139,195,74);
+    fill(69);
   }
   if(isSelectable){
-    stroke(141);
+    stroke(255);
     rect(x, y, w, h, 10);
     textAlign(CENTER, CENTER);
-    fill(0);
+    fill(255);
     text(label, x + (w / 2), y + (h / 2));
   }else{
     stroke(170);

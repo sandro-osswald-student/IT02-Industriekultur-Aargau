@@ -4,10 +4,7 @@ static int maxGameStates = 4;
 
 // Main Menu
 
-Button game = new Button("Spiel", 100,100,500,200);
-Button menu2 = new Button("menu2", 700,100,500,200);
-Button menu3 = new Button("menu3", 100,400,500,200);
-Button menu4 = new Button("menu4", 700,400,500,200);
+
 
 int angle = 0;
 int distanceInt1 = 0;
@@ -29,7 +26,10 @@ String distance1Label = " cm";
 String distance2Label = " cm";
 
 void mainMenu(){
-  background(255);
+  //image(backgroundPicMain, 0, 0);
+  
+  
+  
   game.Draw();
   menu2.notSelectable();
   menu3.notSelectable();
@@ -39,12 +39,10 @@ void mainMenu(){
   menu4.Draw(); 
 }
 
-void secondaryMenu(){  
-  //background(backgroundPic);
-  
+void secondaryMenu(){ 
   fillInputFields();
   
-  image(backgroundPic, (displayWidth /10)*6, 0);
+  image(dufourMap, (displayWidth /10)*6, 0);
   drawTitle();
   drawNavigationList((displayWidth /10)*1 + (displayWidth /20), ((displayHeight/10)*9) -10);  
   
@@ -60,8 +58,10 @@ void secondaryMenu(){
   rect((displayWidth /10)*6 + displayWidth /20, (displayHeight /10)*8, (displayWidth /10)*3, (displayHeight /10)*1);
   fill(69);
   textSize(28);
-  textAlign(LEFT);
-  text("Schematisches Modell des Bordakreises zur Vermessung  von Distanzen", (displayWidth /10)*6 + displayWidth /20 + 20, (displayHeight /10)*8+20, (displayWidth /10)*3, (displayHeight /10)*1 );
+  textAlign(CENTER);
+  text("Schematisches Modell des Bordakreises zur Vermessung  von Distanzen.", 
+  (displayWidth /10)*6 + displayWidth /20 + 20, (displayHeight /10)*8+20, (displayWidth /10)*3-40, (displayHeight /10)*1 );
+  isNumberEmpty();
       
   if(gameState == 0){
     home.Draw();
@@ -175,7 +175,7 @@ void secondaryMenu(){
   }
 }
 
-void drawScreen(String label1){
+void drawScreen(){
   if (screenState == 0){
     mainMenu();
   }
@@ -398,10 +398,12 @@ void mousePressed(){
   }
   
   void isNumberEmpty(){
-    if(getNumber() == "" && gameState >=1 && gameState <= 3){
+    
+    if(getNumber().length() == 0 && getGameState() > 0){
       next.notSelectable();
-      
+      println("not selectable");
     }else{
+      println("ist selectable now");
       next.turnSelectable();
     }
     

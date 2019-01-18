@@ -60,7 +60,7 @@ image(treeImage, x+tree2Position, y-70);
 
 boolean nothingLeftOf(int sensor){
   for(int i = 1; i < sensor; i++){
-    if(getSensorValues(i)!=0){
+    if(getSensorValue(i)!=0){
       return false;
     }
   }
@@ -74,12 +74,26 @@ void drawLines(int x, int y, int gameState){
       strokeWeight(3);
       stroke(69);
       
+      /*
+      if(S1in == 0 && S2in == 0 && S3in == 0 && S4in == 0 && S5in == 0){
+        leftObject = loadImage("emptyIcon.png");
+        rightObject = loadImage("emptyIcon.png");
+      }
+      */
+      
+      if(S1in+S2in+S3in+S4in+S5in== 0){
+        leftObject = loadImage("emptyIcon.png");
+        rightObject = loadImage("emptyIcon.png");
+      }
+      if(S1in+S2in+S3in+S4in+S5in== 1 && S5in != 1){
+        rightObject = loadImage("emptyIcon.png");
+      }
+      
           
   // Wenn Button1 gedrückt dann Farbe grün einstellen, sonst rot
-      if (getSensorValues(1) == 1) {
+      if (S1in == 1) {
         if(gameState >= 2){text(distanceInt1 + "cm", x+80, y+150);}
         line(x+62 , y, x+262, y+300); 
-        
         if(gameState >= 2){
           leftObject = loadImage("Icon Tree.png");
         }else{
@@ -90,7 +104,7 @@ void drawLines(int x, int y, int gameState){
       else {
       }      
       // Wenn Button2 gedrückt dann Farbe grün einstellen, sonst rot
-      if (getSensorValues(2) == 1) {
+      if (S2in == 1) {
         if(nothingLeftOf(2)){
           if(gameState >= 2){
             text(distanceInt1 + "cm", x+160, y+150);
@@ -113,10 +127,10 @@ void drawLines(int x, int y, int gameState){
       else {
       } 
       // Wenn Button2 gedrückt dann Farbe grün einstellen, sonst rot
-      if (getSensorValues(3) == 1) {
+      if (S3in == 1) {
         if(nothingLeftOf(3)){
           if(gameState >= 2){
-          text(distanceInt1 + "cm", x+180, y+150);
+          text(distanceInt1 + "cm", x+220, y+150);
           leftObject = loadImage("Icon Silo.png");
           }else{
             leftObject = loadImage("Icon SiloInactive.png");
@@ -137,10 +151,10 @@ void drawLines(int x, int y, int gameState){
       }
       
       // Wenn Button1 gedrückt dann Farbe grün einstellen, sonst rot
-      if (getSensorValues(4) == 1) {
+      if (S4in == 1) {
         if(nothingLeftOf(4)){
           if(gameState >= 2){
-            text(distanceInt1 + "cm", x+210, y+150);
+            text(distanceInt1 + "cm", x+250, y+150);
             leftObject = loadImage("Icon Barn.png");
           }else{
             leftObject = loadImage("Icon BarnInactive.png");
@@ -148,7 +162,7 @@ void drawLines(int x, int y, int gameState){
           leftObjectName = "der Scheune";
         }else{
           if(gameState >= 3){
-          text(distanceInt2 + "cm", x+350, y+150);
+          text(distanceInt2 + "cm", x+365, y+150);
           rightObject = loadImage("Icon Barn.png");
         }else{
           rightObject = loadImage("Icon BarnInactive.png");
@@ -160,10 +174,10 @@ void drawLines(int x, int y, int gameState){
       else {
       }      
       // Wenn Button2 gedrückt dann Farbe grün einstellen, sonst rot
-      if (getSensorValues(5) == 1) {
-        text(distanceInt2 + "cm", x+390, y+150);
+      if (S5in == 1) {
         line(x+462, y, x+262, y+300);
-        if(gameState >= 2){
+        if(gameState >= 3){
+          text(distanceInt2 + "cm", x+410, y+150);
           rightObject = loadImage("Icon Tree.png");
         }else{
           rightObject = loadImage("Icon TreeInactive.png");
@@ -171,48 +185,48 @@ void drawLines(int x, int y, int gameState){
         rightObjectName = "dem rechten Baum";
       }
       else {
-      } 
+      }
       
       if(gameState == 4){
         stroke(69);
-        if(getSensorValues(1)==1 && getSensorValues(2)== 1){
+        if(S1in==1 && S2in== 1){
           //75 y 95 50
           resultText="Distanz zwischen Baum und Haus";
           line(x+tree1Position+32, y, x+tree1Position+housePosition, y);
           text(resultInt + "cm",((x+tree1Position+32)+(x+tree1Position+housePosition))/2, y+20);
-        }else if(getSensorValues(1)==1 && getSensorValues(3)== 1){
+        }else if(S1in==1 && S3in== 1){
           resultText="Distanz zwischen Baum und Silo";
           line(x+tree1Position+32, y, x+tree1Position+siloPosition, y);
           text(resultInt + "cm",((x+tree1Position+32)+(x+tree1Position+siloPosition))/2, y+20);
-        }else if(getSensorValues(1)==1 && getSensorValues(4)== 1){
+        }else if(S1in==1 && S4in== 1){
           resultText="Distanz zwischen Baum und Scheune";
           line(x+tree1Position+32, y, x+tree1Position+barnPosition, y);
           text(resultInt + "cm",((x+tree1Position+32)+(x+tree1Position+barnPosition))/2, y+20);
-        }else if(getSensorValues(1)==1 && getSensorValues(5)== 1){
+        }else if(S1in==1 && S5in== 1){
           resultText="Distanz zwischen den zwei Bäumen";
           line(x+tree1Position+32, y, x+tree1Position+tree2Position, y);
           text(resultInt + "cm",((x+tree1Position+32)+(x+tree1Position+tree2Position))/2, y+20);
-        }else if(getSensorValues(2)==1 && getSensorValues(3)== 1){
+        }else if(S2in==1 && S3in== 1){
           resultText="Distanz zwischen Haus und Silo";
           line(x+housePosition+32, y, x+tree1Position+siloPosition, y);
           text(resultInt + "cm",((x+housePosition+32)+(x+tree1Position+siloPosition))/2, y+20);
-        }else if(getSensorValues(2)==1 && getSensorValues(4)== 1){
+        }else if(S2in==1 && S4in== 1){
           resultText="Distanz zwischen Haus und Scheune";
           line(x+housePosition+32, y, x+tree1Position+barnPosition, y);
           text(resultInt + "cm",((x+housePosition+32)+(x+tree1Position+barnPosition))/2, y+20);
-        }else if(getSensorValues(2)==1 && getSensorValues(5)== 1){
+        }else if(S2in==1 && S5in== 1){
           resultText="Distanz zwischen Haus und Baum";
           line(x+housePosition+32, y, x+tree1Position+tree2Position, y);
           text(resultInt + "cm",((x+housePosition+32)+(x+tree1Position+tree2Position))/2, y+20);
-        }else if(getSensorValues(3)==1 && getSensorValues(4)== 1){
+        }else if(S3in==1 && S4in== 1){
           resultText="Distanz zwischen Silo und Scheune";
           line(x+siloPosition+32, y, x+tree1Position+barnPosition, y);
           text(resultInt + "cm",((x+siloPosition+32)+(x+tree1Position+barnPosition))/2, y+20);
-        }else if(getSensorValues(3)==1 && getSensorValues(5)== 1){
+        }else if(S3in==1 && S5in== 1){
           resultText="Distanz zwischen Silo und Baum";
           line(x+siloPosition+32, y, x+tree1Position+tree2Position, y);
           text(resultInt + "cm",((x+siloPosition+32)+(x+tree1Position+tree2Position))/2, y+20);
-        }else if(getSensorValues(4)==1 && getSensorValues(5)== 1){
+        }else if(S4in==1 && S5in== 1){
           resultText="Distanz zwischen Scheune und Baum";
           line(x+barnPosition+32, y, x+tree1Position+tree2Position, y);
           text(resultInt + "cm",((x+barnPosition+32)+(x+tree1Position+tree2Position))/2, y+20);
