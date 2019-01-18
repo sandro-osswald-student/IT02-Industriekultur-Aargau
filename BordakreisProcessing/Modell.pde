@@ -45,9 +45,12 @@ void drawLines(int x, int y, int gameState){
       if(S1in+S2in+S3in+S4in+S5in== 0){//if none of the sensors are active, replaces icons above inputField with emptyIcon
         leftObject = loadImage("emptyIcon.png");
         rightObject = loadImage("emptyIcon.png");
+        leftObjectName = "(kein Objekt ausgewählt)";
+        rightObjectName = "(kein Objekt ausgewählt)";
       }
       if(S1in+S2in+S3in+S4in+S5in== 1 && S5in != 1){ //if one of the sensors are active, replaces right icon above inputField with emptyIcon
         rightObject = loadImage("emptyIcon.png");
+        rightObjectName = "(kein Objekt ausgewählt)";
       }
       
       /*checks for gameState look if icons should be greyed out or not and if text for the lines should be displayed or not. 
