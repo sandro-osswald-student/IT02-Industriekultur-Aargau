@@ -25,21 +25,13 @@ int sensorValue5 = 0; // variable to store the value coming from the sensor
 
 int sensorValueEnv = 0; // variable to store the value coming from the sensor
 
-
-int sensorDif1 = 0; // variable to store the value coming from the sensor
-int sensorDif2 = 0; // variable to store the value coming from the sensor
-int sensorDif3 = 0; // variable to store the value coming from the sensor
-int sensorDif4 = 0; // variable to store the value coming from the sensor
-int sensorDif5 = 0; // variable to store the value coming from the sensor
-
-
+//led pins
 const int ledPin1 = 6;
 const int ledPin2 = 5;
 const int ledPin3 = 4;
 const int ledPin4 = 3;
 const int ledPin5 = 2;
 
-// Zum Zwischenspeichern der Button-Zustände
 int lightState1 = 0;
 int lightState2 = 0;
 int lightState3 = 0;
@@ -101,39 +93,12 @@ sensorValue5 = analogRead(sensorPin5)-100; // read the value from the sensor 1
 
 sensorValueEnv = analogRead(sensorPinEnv)-40; // read the value from the sensor Enviroment
 
-/*
-sensorValue1 = analogRead(sensorPin1); // read the value from the sensor 1
-sensorValue2 = analogRead(sensorPin2); // read the value from the sensor 2
-sensorValue3 = analogRead(sensorPin3); // read the value from the sensor 3
-sensorValue4 = analogRead(sensorPin4); // read the value from the sensor 4
-sensorValue5 = analogRead(sensorPin5); // read the value from the sensor 5
-sensorValue6 = analogRead(sensorPin6); // read the value from the sensor 6
-
-sensorValueEnv = analogRead(sensorPinEnv)-50; // read the value from the sensor Enviroment
-*/
 sensorDif1 = sensorValue1 - sensorValueEnv;
 sensorDif2 = sensorValue2-sensorValueEnv;
 sensorDif3 = sensorValue3-sensorValueEnv;
 sensorDif4 = sensorValue4- sensorValueEnv;
 sensorDif5 = sensorValue5- sensorValueEnv;
 
-
-/*
-Serial.print("SensorValue1: ");
-Serial.println(sensorValue1);
-Serial.print("SensorValue2: ");
-Serial.println(sensorValue2);
-Serial.print("SensorValue3: ");
-Serial.println(sensorValue3);
-Serial.print("SensorValue4: ");
-Serial.println(sensorValue4);
-Serial.print("SensorValue5: ");
-Serial.println(sensorValue5);
-
-Serial.print("SensorValueEnv: ");
-Serial.println(sensorValueEnv);
-
-*/
 
   data = normalizeData(lightState1, lightState2, lightState3, lightState4, lightState5);
   // dieser String (z.B. S10E+Zeilwenwechsel) wird dann seriell ausgegeben.
@@ -196,7 +161,7 @@ Serial.println(sensorValueEnv);
   }
 }
  
-// normalizeData fügt die Werte der beiden Buttons zusammen und ergänzt den String um ein eindeutiges Start- und Endezeichen
+// normalizeData fügt die Werte der Sensoren zusammen und ergänzt den String um ein eindeutiges Start- und Endezeichen
 String normalizeData(int s1, int s2, int s3, int s4, int s5) {
  
   S1string = String(s1);
@@ -205,7 +170,7 @@ String normalizeData(int s1, int s2, int s3, int s4, int s5) {
   S4string = String(s4);
   S5string = String(s5);
  
-  // Erzeugt Werte wie S00E, S10E, S01E, S11E
+  // Erzeugt Werte wie S00000E, S10000E, S00001E, S01100E
   String ret = String("S") + S1string + S2string + S3string + S4string + S5string +String("E");
   return ret;
 }
